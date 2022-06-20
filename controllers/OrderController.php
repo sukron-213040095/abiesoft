@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
 
     public function checkout()
-    {;
+    {
         return $this->view(page: 'order/checkout', data: [
             'title' => 'Checkout Order',
             'authButton' => \App\Controllers\TemplateController::authButton()

@@ -6,6 +6,7 @@ use AbieSoft\Http\Route;
 use AbieSoft\Auth\AuthController;
 use AbieSoft\Utilities\Define;
 use App\Controllers\HomeController;
+use App\Controllers\KategoriController;
 use App\Controllers\WebserviceController;
 
 require_once __DIR__ . "/../vendor/autoload.php";
@@ -31,6 +32,7 @@ use App\Controllers\ProfileController;
 
 
 Route::get('/profile', [ProfileController::class, 'detail']);
+Route::get('/kategori/{:nama}', [KategoriController::class, 'index']);
 
 
 
@@ -47,6 +49,7 @@ Route::sistem(AuthController::class);
 Route::get('/webservice/user{:apikey}{:opsi}', [WebserviceController::class, 'profile']);
 Route::get('/webservice/user{:apikey}{:tab}', [WebserviceController::class, 'tab']);
 Route::get('/webservice/user{:apikey}{:list}', [WebserviceController::class, 'list']);
+Route::get('/webservice/user{:apikey}{:list}{:slug}', [WebserviceController::class, 'list']);
 Route::post('/webservice/profile/update', [WebserviceController::class, 'act']);
 Route::get('/webservice/formater{:tgl}', [WebserviceController::class, 'formater']);
 

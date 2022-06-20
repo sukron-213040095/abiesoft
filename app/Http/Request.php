@@ -45,7 +45,15 @@ class Request
                 $path = $path . $request;
             }
         } else {
-            $path = $path;
+            if (count(explode("/", $path)) > 2) {
+                if (count(explode("-", $path)) > 1) {
+                    $path = "/" . explode("/", $path)[1] . "/" . "{:nama}";
+                } else {
+                    $path = $path;
+                }
+            } else {
+                $path = $path;
+            }
         }
 
         if (rtrim($path, '/') == '') {

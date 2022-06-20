@@ -28,8 +28,8 @@ final class Template44dd94f5ec extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 9 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 73 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 74 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 75 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 76 */;
 	}
 
 
@@ -72,9 +72,13 @@ final class Template44dd94f5ec extends Latte\Runtime\Template
 	public function blockContent(array $ʟ_args): void
 	{
 		echo '    <div class="text-center pt-[25px] pb-[50px] flex justify-center">
-        <h2 class="font-semibold text-[24pt] w-[100px]"><img src="';
+        <a href="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 11 */;
-		echo '/assets/media/images/logo_umieali_name.png" class="w-[100px]"></h2>
+		echo '" class="font-semibold text-[24pt] w-[100px]">
+            <img src="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 12 */;
+		echo '/assets/media/images/logo_umieali_name.png" class="w-[100px]">
+        </a>
     </div>
 
     <div class="flex justify-center">
@@ -90,7 +94,7 @@ final class Template44dd94f5ec extends Latte\Runtime\Template
                             <button type="button" class="w-[100%] px-8 py-2 border radius-lg border-gray-200 font-semibold">
                                 <div class="flex justify-center aligns-center">
                                 <img src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 29 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 31 */;
 		echo '/assets/media/images/logo_google.png" class="w-[25px] h-[25px] mr-[10px]">
                                     <div>Daftar dengan Google</div>
                                 </div>
@@ -120,15 +124,15 @@ final class Template44dd94f5ec extends Latte\Runtime\Template
                             </div>
                             <div class="mb-4">
                                 ';
-		echo LR\Filters::escapeHtmlText(\AbieSoft\Utilities\Generate::token()) /* line 57 */;
+		echo LR\Filters::escapeHtmlText(\AbieSoft\Utilities\Generate::token()) /* line 59 */;
 		echo '<input type="hidden" id="__token" name="__token" value="';
-		echo LR\Filters::escapeHtmlAttr(\AbieSoft\Magic\Reader::token()) /* line 57 */;
+		echo LR\Filters::escapeHtmlAttr(\AbieSoft\Magic\Reader::token()) /* line 59 */;
 		echo '">
                                 <button type="submit"  id="btnRegistrasi" name="btnRegistrasi" class="mt-2 radius-lg px-4 py-2 border bg-sky-900 hover:bg-sky-800 text-white font-semibold w-full outline-none">Daftar</button>
                             </div>
                             <div class="mb-4 text-[10pt] text-center">
                                 Dengan mendaftar berarti anda menyetujui <a class="text-sky-700 hover:text-amber-500" href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 61 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 63 */;
 		echo '/syaratketentuan" target="_blank">Syarat dan Ketentuan</a> toko kami.
                             </div>
                         </div>
@@ -139,23 +143,23 @@ final class Template44dd94f5ec extends Latte\Runtime\Template
     </div>
 
     <div class="text-center mt-[50px] mb-[25px] text-[11pt] font-semibold">&copy; ';
-		echo LR\Filters::escapeHtmlText(date('Y')) /* line 70 */;
+		echo LR\Filters::escapeHtmlText(date('Y')) /* line 72 */;
 		echo ' | <span>Umieali Cake & Cookies</span></div>
 ';
 	}
 
 
-	/** {block pluginjs} on line 73 */
+	/** {block pluginjs} on line 75 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 74 */
+	/** {block pagejs} on line 76 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		echo '    <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 75 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 77 */;
 		echo '/assets/jsa/registrasi.js"></script>
 ';
 	}

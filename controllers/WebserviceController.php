@@ -184,26 +184,41 @@ class WebserviceController extends Controller
 
     public function list()
     {
-        $model = Input::get('list');
-        return match ($model) {
-            'kategori' => $this->listkategori(),
-            'palinglaku' => $this->palinglaku(),
-            'promo' => $this->promo(),
-            'terbaru' => $this->terbaru(),
-            default => $this->error()
-        };
+        $api = Input::get('apikey');
+        if ($this->apicheck($api)) {
+            $model = Input::get('list');
+            return match ($model) {
+                'kategori' => $this->listkategori(Input::get('slug')),
+                'palinglaku' => $this->palinglaku(),
+                'promo' => $this->promo(),
+                'terbaru' => $this->terbaru(),
+                default => $this->error()
+            };
+        } else {
+            return $this->error();
+        }
     }
 
-    protected function listkategori()
+    protected function listkategori($slug)
     {
-        echo "Kategori";
+        $data = [
+            [
+                'id' => 1,
+                'nama' => 'Kue Ulang Tahun Redvelvet 1',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-1',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ]
+        ];
+        echo json_encode($data);
     }
 
     protected function palinglaku()
     {
         $data = [
             [
-                'Id' => 1,
+                'id' => 1,
                 'nama' => 'Kue Ulang Tahun Redvelvet 1',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-1',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -211,7 +226,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 2,
+                'id' => 2,
                 'nama' => 'Kue Ulang Tahun Redvelvet 2',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -219,7 +234,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 3,
+                'id' => 3,
                 'nama' => 'Kue Ulang Tahun Redvelvet 3',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -227,7 +242,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 4,
+                'id' => 4,
                 'nama' => 'Kue Ulang Tahun Redvelvet 4',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -235,7 +250,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 5,
+                'id' => 5,
                 'nama' => 'Kue Ulang Tahun Redvelvet 5',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -243,7 +258,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 6,
+                'id' => 6,
                 'nama' => 'Kue Ulang Tahun Redvelvet 6',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -258,7 +273,7 @@ class WebserviceController extends Controller
     {
         $data = [
             [
-                'Id' => 1,
+                'id' => 1,
                 'nama' => 'Kue Ulang Tahun Redvelvet 1',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-1',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -267,7 +282,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 2,
+                'id' => 2,
                 'nama' => 'Kue Ulang Tahun Redvelvet 2',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -276,7 +291,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 3,
+                'id' => 3,
                 'nama' => 'Kue Ulang Tahun Redvelvet 3',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -285,7 +300,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 4,
+                'id' => 4,
                 'nama' => 'Kue Ulang Tahun Redvelvet 4',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -294,7 +309,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 5,
+                'id' => 5,
                 'nama' => 'Kue Ulang Tahun Redvelvet 5',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -303,7 +318,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 6,
+                'id' => 6,
                 'nama' => 'Kue Ulang Tahun Redvelvet 6',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -319,7 +334,7 @@ class WebserviceController extends Controller
     {
         $data = [
             [
-                'Id' => 1,
+                'id' => 1,
                 'nama' => 'Kue Ulang Tahun Redvelvet 1',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-1',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -327,7 +342,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 2,
+                'id' => 2,
                 'nama' => 'Kue Ulang Tahun Redvelvet 2',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -335,7 +350,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 3,
+                'id' => 3,
                 'nama' => 'Kue Ulang Tahun Redvelvet 3',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -343,7 +358,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 4,
+                'id' => 4,
                 'nama' => 'Kue Ulang Tahun Redvelvet 4',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -351,7 +366,7 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 5,
+                'id' => 5,
                 'nama' => 'Kue Ulang Tahun Redvelvet 5',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
@@ -359,7 +374,1087 @@ class WebserviceController extends Controller
                 'harga' => 130000
             ],
             [
-                'Id' => 6,
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Kue Ulang Tahun Redvelvet 6',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Kue Ulang Tahun Redvelvet 2',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-2',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Kue Ulang Tahun Redvelvet 3',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-3',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Kue Ulang Tahun Redvelvet 4',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-4',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Kue Ulang Tahun Redvelvet 5',
+                'slug' => 'Kue-Ulang-Tahun-Redvelvet-5',
+                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
+                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
+                'harga' => 130000
+            ],
+            [
+                'id' => 6,
                 'nama' => 'Kue Ulang Tahun Redvelvet 6',
                 'slug' => 'Kue-Ulang-Tahun-Redvelvet-6',
                 'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',

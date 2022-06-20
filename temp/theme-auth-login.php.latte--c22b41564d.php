@@ -83,11 +83,13 @@ final class Templatec22b41564d extends Latte\Runtime\Template
 	public function blockContent(array $ʟ_args): void
 	{
 		echo '    <div class="text-center pt-[25px] pb-[50px] flex justify-center">
-        <h2 class="font-semibold text-[24pt] w-[100px]">
+        <a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 13 */;
+		echo '" class="font-semibold text-[24pt] w-[100px]">
             <img src="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 14 */;
 		echo '/assets/media/images/logo_umieali_name.png" class="w-[100px]">
-        </h2>
+        </a>
     </div>
 
     <div class="flex justify-center">
