@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/images/favicon.ico">
+    <link rel="stylesheet" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/vendor/flag-icon-css/flag-icon.css">
+    <link rel="stylesheet" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/fonts/web-icons/web-icons.min.css">
+    <link rel="stylesheet" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/fonts/brand-icons/brand-icons.min.css">
+    <link rel="stylesheet" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/vendor/bootstrap-sweetalert/sweetalert.css">
+    <link rel="stylesheet" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/vendor/toastr/toastr.css">
+    <link rel="stylesheet" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/css/abiesoft.css">
+    <link rel="stylesheet" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/css/owl.theme.default.min.css">
+    {block plugincss}{/block}
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+        const BASEURL = {\AbieSoft\Utilities\Config::envReader('BASEURL')};
+        const APIKEY = {\AbieSoft\Utilities\Config::envReader('APIKEY')};
+    </script>
+    {var $header = false}
+</head>
+<title>{block title}{/block}</title>
+<body class="{block body}{/block}">
+    {include 'theme/components/header.php.latte'}
+    {block content}{/block}
+    {block dialog}{/block}
+    {include 'theme/components/footer.php.latte'}
+
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/js/jquery.js"></script>
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/js/owl.carousel.min.js"></script>
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/vendor/bootstrap-sweetalert/sweetalert.js"></script>
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/vendor/toastr/toastr.js"></script>
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/js/page/sweetalert.js"></script>
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/js/page/toastr.js"></script>
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/js/validasi.js"></script>
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/jsa/index.js"></script>
+    {block pluginjs}{/block}
+    {*
+        Blok untuk include javascript per page
+    *}
+    {block pagejs}{/block}
+    <script>
+        (function(document, window, $){
+            'use strict';
+
+            var Site = window.Site;
+            $(document).ready(function(){
+                Site.run();
+            });
+        })(document, window, jQuery);
+    </script>
+</body>
+</html>

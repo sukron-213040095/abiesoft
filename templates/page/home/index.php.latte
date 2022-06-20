@@ -1,0 +1,343 @@
+{layout '../../launcher.php.latte'}
+
+{block title} {$title} {/block}
+
+{block plugincss}{/block}
+
+{block body}bg-slate-200{/block}
+
+{block content}
+    <div class="float w-[1100px] ml-auto mr-auto">
+        {* Carousel *}
+        <div class="owl-carousel">
+            <div><img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/img_1.png" class="w-[100%] block"></div>
+            <div><img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/img_2.png" class="w-[100%] block"></div>
+            <div><img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/img_3.png" class="w-[100%] block"></div>
+        </div>
+        {* /Carousel *}
+        <div class="text-center">
+            <div class="text-[20pt] font-semibold">Rayakan pesta bersama yang spesial dari kreasi kami</div>
+            <div class="text-[20pt] font-semibold">Umieali cake and cookies</div>
+        </div>
+
+        {* Kategori *}
+        <div class="category mt-8 mb-8">
+            <div class="grid grid-cols-7 gap-4">
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/aneka-bolu" class="bg-slate-100 rounded-[10px] overflow-hidden hover:opacity-[.9] cursor-pointer">
+                    <div class="w-[1500px] h-[150px] overflow-hidden">
+                        <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/img_1.png" class="w-[150px] h-[150px] object-cover">
+                    </div>
+                    <div class="absolute font-semibold text-[10pt] p-2 bg-yellow-300 mt-[-60px] rounded-br-[25px] pr-[20px]">Aneka Bolu</div>
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/kue-pernikahan" class="bg-slate-100 rounded-[10px] overflow-hidden hover:opacity-[.9] cursor-pointer">
+                    <div class="w-[1500px] h-[150px] overflow-hidden">
+                        <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/img_1.png" class="w-[150px] h-[150px] object-cover">
+                    </div>
+                    <div class="absolute font-semibold text-[10pt] p-2 bg-yellow-300 mt-[-60px] rounded-br-[25px] pr-[20px]">Kue Pernikahan</div>
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/kue-ulang-tahun" class="bg-slate-100 rounded-[10px] overflow-hidden hover:opacity-[.9] cursor-pointer">
+                    <div class="w-[1500px] h-[150px] overflow-hidden">
+                        <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/storage/images/ultah_1.jpg" class="w-[150px] object-cover">
+                    </div>
+                    <div class="absolute font-semibold text-[10pt] p-2 bg-yellow-300 mt-[-60px] rounded-br-[25px] pr-[20px]">Kue Ulang Tahun</div>
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/nasi-tumpeng" class="bg-slate-100 rounded-[10px] overflow-hidden hover:opacity-[.9] cursor-pointer">
+                    <div class="w-[1500px] h-[150px] overflow-hidden">
+                        <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/img_1.png" class="w-[150px] h-[150px] object-cover">
+                    </div>
+                    <div class="absolute font-semibold text-[10pt] p-2 bg-yellow-300 mt-[-60px] rounded-br-[25px] pr-[20px]">Nasi Tumpeng</div>
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/aneka-puding" class="bg-slate-100 rounded-[10px] overflow-hidden hover:opacity-[.9] cursor-pointer">
+                    <div class="w-[1500px] h-[150px] overflow-hidden">
+                        <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/img_1.png" class="w-[150px] h-[150px] object-cover">
+                    </div>
+                    <div class="absolute font-semibold text-[10pt] p-2 bg-yellow-300 mt-[-60px] rounded-br-[25px] pr-[20px]">Aneka Puding</div>
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/snackbox" class="bg-slate-100 rounded-[10px] overflow-hidden hover:opacity-[.9] cursor-pointer">
+                    <div class="w-[1500px] h-[150px] overflow-hidden">
+                        <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/storage/images/snack_1.jpg" class="w-[150px] h-[150px] object-cover">
+                    </div>
+                    <div class="absolute font-semibold text-[10pt] p-2 bg-yellow-300 mt-[-60px] rounded-br-[25px] pr-[20px]">Snackbox</div>
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/aneka-jajanan" class="bg-slate-100 rounded-[10px] overflow-hidden hover:opacity-[.9] cursor-pointer">
+                    <div class="w-[1500px] h-[150px] overflow-hidden">
+                        <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/img_1.png" class="w-[150px] h-[150px] object-cover">
+                    </div>
+                    <div class="absolute font-semibold text-[10pt] p-2 bg-yellow-300 mt-[-60px] rounded-br-[25px] pr-[20px]">Aneka Jajanan</div>
+                </a>
+            </div>
+        </div>
+        {* /Kategori *}
+
+        <div class="palinglaku mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 50%);">
+            <h2 class="pb-[40px] text-center w-full block font-semibold text-[20pt]">Paling Laku</h2>
+            <div id='dataPalingLaku'>
+                <div class="grid grid-cols-6 gap-4">
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lagipromo mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 50%);">
+            <h2 class="pb-[40px] text-center w-full block font-bold text-[20pt]">Lagi Promo Nie.. Lumayan Hemat Beberapa Persen. Ayo!</h2>
+            <div id='dataDiskon'>
+                <div class="grid grid-cols-6 gap-4">
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div><hr></div>
+
+        <div class="AllItem mt-8 mb-8">
+            <div id="dataTerbaru">
+                <div class="grid grid-cols-6 gap-4">
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
+                        <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
+                            <div class="w-full h-[180px] bg-slate-100 shimmer"></div>
+                        </div>
+                        <div class="p-2">
+                            <h2 class="text-[10pt] font-bold leading-[15px]"><div class="w-full h-[17px] bg-slate-100 shimmer"></div></h2>
+                            <p class="text-[8pt] text-justify my-2 leading-[15px]"><div class="w-full h-[13px] bg-slate-100 shimmer"></div></p>
+                            <div class="flex justify-between items-center">
+                                <div class="text-[12pt] font-bold text-sky-500"><div class="w-full h-[20px] bg-slate-100 shimmer"></div></div>
+                                <div class="text-[14pt] font-bold text-red-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        
+    </div>
+    <div class='clear-both'></div>
+{/block}
+
+{block pluginjs}{/block}
+{block pagejs}
+    <script src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/jsa/home/carousel.js"></script>
+{/block}
+
+{block footer}{/block}

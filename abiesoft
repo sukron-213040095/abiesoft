@@ -1,0 +1,7 @@
+<?php
+
+require_once "vendor/autoload.php";
+
+use AbieSoft\Console\Command;
+
+new Command($argv);
