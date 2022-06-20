@@ -51,6 +51,7 @@ Route::get('/webservice/user{:apikey}{:tab}', [WebserviceController::class, 'tab
 Route::get('/webservice/user{:apikey}{:list}', [WebserviceController::class, 'list']);
 Route::get('/webservice/user{:apikey}{:list}{:slug}', [WebserviceController::class, 'list']);
 Route::post('/webservice/profile/update', [WebserviceController::class, 'act']);
+Route::post('/webservice/profile/upload', [WebserviceController::class, 'upload']);
 Route::get('/webservice/formater{:tgl}', [WebserviceController::class, 'formater']);
 
 $app->start();

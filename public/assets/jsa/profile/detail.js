@@ -78,7 +78,7 @@ function showTabBiodata (){
                     <div class="p-6">
                         <div class="p-2 float-left w-[30%] border-[1px] border-solid border-gray-100">
                             <div>
-                                <img src='`+photo+`' class="w-full">
+                                <img id='pp2' src='`+photo+`' class="w-full">
                             </div>
                             <div class='relative'>
                                 <form onSubmit="return uploadPhoto()" method='post' action='' id='formUpload' name='formUpload' enctype="multipart/form-data">
@@ -742,27 +742,33 @@ function submitHapus(){
 
 function uploadPhoto(){
     let photo = document.forms["formUpload"]["photo"].value;
-    let model = document.forms["formUpload"]["photo"].model;
     if (setText(photo)) {
         toastr.info("Photo " + setText(photo));
         document.getElementById("photo").focus();
         return false;
     }else{
-        let doAction =  BASEURL + "/webservice/profile/update";
-        let formData = new FormData();
-        formData.append('model', model);
-        formData.append('photo', file);
-        $.ajax({
-            type: "POST",
-            url: doAction,
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(msg) {
-                toastr.info(msg);
-                return false;
+        const formData = new FormData();
+        const filePhoto = document.querySelector('input[type="file"]');
+        formData.append('photo', filePhoto.files[0]);
+        fetch(BASEURL + "/webservice/profile/upload", {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('pp1').setAttribute('src',data[0].photo);
+            document.getElementById('pp2').setAttribute('src',data[0].photo);
+            if(data[0].status === "Sukses"){
+                toastr.success("Photo sudah diperbarui");
+            }else if(data[0].status === "Sukses"){
+                toastr.error("Gagal memperbarui photo");
+            }else{
+                toastr.error(data[0].status);
             }
+        })
+        .catch(error => {
+            toastr.error("Gagal memperbarui photo");
         });
+        return false;
     }
-    return false;
 }

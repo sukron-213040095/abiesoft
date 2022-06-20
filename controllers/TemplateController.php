@@ -16,7 +16,7 @@ class TemplateController extends Controller
         if (AuthController::isLogin()) {
             $Button = Html::el('div')->addHtml('
                 <div class="w-[50px] h-[50px] rounded-[50%] overflow-hidden cursor-pointer" onClick="return showProfileOption()">
-                    <img src="' . $photo . '" class="w-[50px] h-[50px] object-cover">
+                    <img id="pp1" src="' . $photo . '" class="w-[50px] h-[50px] object-cover">
                 </div>
             ');
         } else {

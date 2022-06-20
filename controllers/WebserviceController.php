@@ -8,6 +8,7 @@ use AbieSoft\Mysql\DB;
 use AbieSoft\Utilities\Config;
 use AbieSoft\Utilities\Hash;
 use AbieSoft\Utilities\Input;
+use AbieSoft\Utilities\Metafile;
 use AbieSoft\Utilities\Tanggal;
 use Google\Service\CloudSearch\Id;
 
@@ -75,7 +76,6 @@ class WebserviceController extends Controller
             'pertanyaan' => $this->pertanyaan(Input::get('pertanyaan'), Input::get('jawaban')),
             'password' => $this->password(Input::get('password')),
             'hapus' => $this->hapus(Input::get('password')),
-            'upload' => $this->upload($_FILES),
             default => $this->error()
         };
     }
@@ -176,9 +176,48 @@ class WebserviceController extends Controller
         }
     }
 
-    protected function upload($file)
+    public function upload()
     {
-        print_r($file);
+
+        $uid = AuthController::getID();
+        $folder = __DIR__ . "/../public/assets/storage/photo/" . $uid . "/";
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777);
+        }
+        $tmp_name = Input::file('photo', 'tmp_name');
+        $nama = Input::file('photo', 'name');
+        $ukuran = Input::file('photo', 'ukuran');
+        $target = $folder . basename(substr(sha1(date('YmdHis')), 5, 9) . "_" . $nama);
+
+        if (Metafile::approver('photo', $nama, $ukuran) == "diijinkan") {
+            if (move_uploaded_file($tmp_name, $target)) {
+                DB::terhubung()->perbarui('users', $uid, array(
+                    'photo' => "/assets" . explode("assets", $target)[1],
+                    'diupdate' => date('Y-m-d H:i:s')
+                ));
+                $data = [
+                    [
+                        'photo' => AuthController::getPhoto(),
+                        'status' => 'Sukses'
+                    ]
+                ];
+            } else {
+                $data = [
+                    [
+                        'photo' => AuthController::getPhoto(),
+                        'gagal' => 'Cancel'
+                    ]
+                ];
+            }
+        } else {
+            $data = [
+                [
+                    'photo' => AuthController::getPhoto(),
+                    'gagal' => Metafile::approver('photo', $nama, $ukuran)
+                ]
+            ];
+        }
+        echo json_encode($data);
     }
 
 

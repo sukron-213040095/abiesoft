@@ -17,6 +17,11 @@ class Route extends Request
         return self::$routes['post'][$path] = $callback;
     }
 
+    public static function put($path, $callback)
+    {
+        return self::$routes['put'][$path] = $callback;
+    }
+
     public static function sistem($class)
     {
         Route::get('/login', [$class, 'login']);
