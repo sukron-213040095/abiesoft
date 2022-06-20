@@ -28,8 +28,8 @@ final class Template26608761a2 extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 9 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 79 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 80 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 80 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 81 */;
 	}
 
 
@@ -76,6 +76,7 @@ final class Template26608761a2 extends Latte\Runtime\Template
         <div class="bg-white shadow-sm bg-white shadow-sm right-0 min-h-[200px] rounded-lg overflow-hidden">
             <div class="flex justify-left items-center">
                 <div id="btnBiodata" onClick="showTabBiodata()" class="cursor-pointer px-6 text-gray-300 text-sky-400 font-semibold border-b-[2px] border-solid border-sky-400 pt-4 pb-[14px]">Biodata</div>
+                <div id="btnProduk" onClick="showTabProduk()" class="cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold">Produk</div>
                 <div id="btnAlamat" onClick="showTabAlamat()" class="cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold">Alamat</div>
                 <div id="btnPembayaran" onClick="showTabpembayaran()" class="cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold">Pembayaran</div>
             </div>
@@ -142,17 +143,17 @@ final class Template26608761a2 extends Latte\Runtime\Template
 	}
 
 
-	/** {block pluginjs} on line 79 */
+	/** {block pluginjs} on line 80 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 80 */
+	/** {block pagejs} on line 81 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		echo '    <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 81 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 82 */;
 		echo '/assets/jsa/profile/detail.js"></script>
 ';
 	}

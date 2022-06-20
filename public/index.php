@@ -21,6 +21,7 @@ new Define;
 $app = new AbieSoftAppSystem;
 
 use App\Controllers\OrderController;
+use App\Controllers\ProdukController;
 use App\Controllers\ProfileController;
 
 /*  
@@ -33,6 +34,7 @@ use App\Controllers\ProfileController;
 
 Route::get('/profile', [ProfileController::class, 'detail']);
 Route::get('/kategori/{:nama}', [KategoriController::class, 'index']);
+Route::post('/webservice/produk/new', [ProdukController::class, 'new']);
 
 
 

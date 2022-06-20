@@ -22,10 +22,27 @@ class kategori
 
     public static function buatdata()
     {
-        //DB::terhubung()->input('kategori', array(
-        // Input data disini 
-        //));  
-
+        DB::terhubung()->input('kategori', array(
+            'nama' => 'Aneka Kue'
+        ));
+        DB::terhubung()->input('kategori', array(
+            'nama' => 'Kue Pengantin'
+        ));
+        DB::terhubung()->input('kategori', array(
+            'nama' => 'Kue Khitan'
+        ));
+        DB::terhubung()->input('kategori', array(
+            'nama' => 'Kue Ulang Tahun'
+        ));
+        DB::terhubung()->input('kategori', array(
+            'nama' => 'Tumpeng'
+        ));
+        DB::terhubung()->input('kategori', array(
+            'nama' => 'Puding'
+        ));
+        DB::terhubung()->input('kategori', array(
+            'nama' => 'Snack Box'
+        ));
     }
 }
 

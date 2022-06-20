@@ -1,4 +1,4 @@
-/// Terbaru
+/// Kategori
 let kategori = new Worker(BASEURL+'/assets/jsa/worker/worker-kategori.js');
 kategori.postMessage([BASEURL,APIKEY,SLUG]);
 kategori.onmessage = function(e) {

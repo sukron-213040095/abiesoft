@@ -23,4 +23,9 @@ class KategoriController extends Controller
             'authButton' => \App\Controllers\TemplateController::authButton()
         ]);
     }
+
+    public function list()
+    {
+        echo "<option>Item</option>";
+    }
 }
