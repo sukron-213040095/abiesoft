@@ -240,7 +240,8 @@ class WebserviceController extends Controller
         $id = Input::get('id');
         if (AuthController::isLogin()) {
             return match ($whatToDo) {
-                'hapus' => ProdukController::hapus($id),
+                'delete' => ProdukController::delete($id),
+                'read' => ProdukController::read($id),
                 default => $this->error()
             };
         } else {
@@ -250,7 +251,7 @@ class WebserviceController extends Controller
 
     protected function palinglaku()
     {
-        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE laku != 0 ORDER BY laku DESC LIMIT 6");
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE laku != 0 AND publik = 'publik' ORDER BY laku DESC LIMIT 6");
 
         $list = [];
         foreach ($produk->hasil() as $p) {
@@ -268,7 +269,7 @@ class WebserviceController extends Controller
 
     protected function promo()
     {
-        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE diskon != 0 ORDER BY id DESC LIMIT 6");
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE diskon != 0 AND publik = 'publik' ORDER BY id DESC LIMIT 6");
 
         $list = [];
         foreach ($produk->hasil() as $p) {
@@ -288,7 +289,7 @@ class WebserviceController extends Controller
     protected function terbaru()
     {
 
-        $produk = DB::terhubung()->query("SELECT * FROM produk ORDER BY id DESC");
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE  publik = 'publik' ORDER BY id DESC");
 
         $list = [];
         foreach ($produk->hasil() as $p) {

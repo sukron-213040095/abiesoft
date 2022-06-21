@@ -155,6 +155,18 @@ final class Template26608761a2 extends Latte\Runtime\Template
 		echo '    <script src="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 82 */;
 		echo '/assets/jsa/profile/detail.js"></script>
+    <script src="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 83 */;
+		echo '/assets/jsa/profile/tabBiodata.js"></script>
+    <script src="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 84 */;
+		echo '/assets/jsa/profile/tabProduk.js"></script>
+    <script src="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 85 */;
+		echo '/assets/jsa/profile/tabAlamat.js"></script>
+    <script src="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 86 */;
+		echo '/assets/jsa/profile/tabPembayaran.js"></script>
 ';
 	}
 }

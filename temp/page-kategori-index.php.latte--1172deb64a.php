@@ -28,8 +28,8 @@ final class Template1172deb64a extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 9 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 573 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 574 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 601 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 602 */;
 	}
 
 
@@ -80,10 +80,50 @@ final class Template1172deb64a extends Latte\Runtime\Template
         <h2 class="text-[20pt] font-semibold">';
 		echo LR\Filters::escapeHtmlText($nama) /* line 12 */;
 		echo '</h2>
+
+        <div class="category mt-8 mb-8">
+            <div class="grid grid-cols-7 gap-4">
+                <a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 17 */;
+		echo '/kategori/aneka-bolu" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Aneka Bolu
+                </a>
+                <a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 20 */;
+		echo '/kategori/kue-pengantin" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Kue Pengantin
+                </a>
+                <a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 23 */;
+		echo '/kategori/kue-khitan" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Kue Khitan
+                </a>
+                <a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 26 */;
+		echo '/kategori/kue-ulang-tahun" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Kue Ulang Tahun
+                </a>
+                <a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 29 */;
+		echo '/kategori/-tumpeng" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Tumpeng
+                </a>
+                <a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 32 */;
+		echo '/kategori/-pudding" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Puding
+                </a>
+                <a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 35 */;
+		echo '/kategori/snack-box" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Snack Box
+                </a>
+            </div>
+        </div>
     </div>
 
     <div>
-        <div class="AllItem mt-8 mb-8">
+        <div class="AllItem mb-8">
             <div id="itemKategori">
                 <div class="grid grid-cols-6 gap-4">
                     <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
@@ -642,13 +682,13 @@ final class Template1172deb64a extends Latte\Runtime\Template
 	}
 
 
-	/** {block pluginjs} on line 573 */
+	/** {block pluginjs} on line 601 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 574 */
+	/** {block pagejs} on line 602 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		extract($this->params);
@@ -656,10 +696,10 @@ final class Template1172deb64a extends Latte\Runtime\Template
 		unset($ʟ_args);
 
 		echo '<script>let SLUG = ';
-		echo LR\Filters::escapeJs($slug) /* line 575 */;
+		echo LR\Filters::escapeJs($slug) /* line 603 */;
 		echo ';</script>
 <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 576 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 604 */;
 		echo '/assets/jsa/produk/kategori.js"></script>
 ';
 	}

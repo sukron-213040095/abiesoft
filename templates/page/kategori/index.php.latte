@@ -10,10 +10,38 @@
 <div class="float w-[1100px] ml-auto mr-auto">
     <div class="w-full text-center p-8">
         <h2 class="text-[20pt] font-semibold">{$nama}</h2>
+
+        {* Kategori *}
+        <div class="category mt-8 mb-8">
+            <div class="grid grid-cols-7 gap-4">
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/aneka-bolu" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Aneka Bolu
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/kue-pengantin" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Kue Pengantin
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/kue-khitan" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Kue Khitan
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/kue-ulang-tahun" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Kue Ulang Tahun
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/-tumpeng" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Tumpeng
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/-pudding" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Puding
+                </a>
+                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/snack-box" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
+                    Snack Box
+                </a>
+            </div>
+        </div>
+        {* /Kategori *}
     </div>
 
     <div>
-        <div class="AllItem mt-8 mb-8">
+        <div class="AllItem mb-8">
             <div id="itemKategori">
                 <div class="grid grid-cols-6 gap-4">
                     <div class="bg-white rounded-md overflow-hidden border-solid border-[2px] border-white">
