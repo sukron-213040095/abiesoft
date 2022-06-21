@@ -125,17 +125,19 @@ function showTabProduk (){
                 <div>
                     <div class='w-full text-center'>
                         <div class="text-[10pt] leading-[15px] mb-[5px]">Jumlah Data</div>
-                        <div class="font-bold text-[16pt] leading-[15px] w-full text-sky-400">`+data.length+`</div>
+                        <div class="font-bold text-[16pt] leading-[15px] w-full text-sky-400" id='showJumlah'>`+data.length+`</div>
                     </div>
                 </div>
                 <div>
-                    <input type='text' class="border-[1px] border-solid border-slate-200 outline-none rounded-md px-4 py-2 focus:border-gray-200 focus:bg-gray-50" placeholder="Cari Produk">
+                    <input type='text' class="border-[1px] border-solid border-slate-200 outline-none rounded-md px-4 py-2 focus:border-gray-200 focus:bg-gray-50" placeholder="Cari Produk" onKeyUp='cariProduk(this.value)'>
                 </div>
                 <div class="text-center">
                     <button onClick="tambahProduk()" class="bg-sky-400 hover:bg-sky-300 text-white px-3 py-1 rounded-md">Tambah Produk</button>
                 </div>
             </div>
-        </div>`;
+        </div>
+        <div id='forSearch'>
+        `;
         for(let i = 0; i < data.length; i++){
 
             let warna = "bg-green-400";
@@ -184,7 +186,68 @@ function showTabProduk (){
                 <div class="clear-both"></div>
             </div>`;
         }
+        result +=`</div>`;
         document.getElementById('profilDetail').innerHTML = result;
+    }
+}
+
+
+function cariProduk(KEYWORD){
+    let searchproduk = new Worker(BASEURL + '/assets/jsa/worker/CrudProduk/worker-search.js');
+    searchproduk.postMessage([BASEURL,APIKEY,KEYWORD]);
+    searchproduk.onmessage = function(e) {
+        let result = "";
+        let data = e.data;
+        for(let i = 0; i < data.length; i++){
+
+            let warna = "bg-green-400";
+            if(data[i].publik == "draf"){
+                warna = "bg-red-400";
+            }else{
+                warna = "bg-green-400";
+            }
+
+            result +=`
+            <div class="p-6 border-b-[1px] border-solid border-slate-200 hover:bg-slate-50 relative">
+                <div class="absolute w-[90px] h-[90px] bg-slate-100 ">
+                    <img src='`+data[i].gambar+`' class="w-[90px] h-[90px] object-cover">
+                </div>
+                <div class="float-left ml-[110px]">
+                    <h2 class="font-semibold text-[12pt] leading-[15px] mb-2">`+data[i].nama+`</h2>
+                    <div class="w-[90%] text-gray-400 leading-[15px] mb-2">`+data[i].keterangan+`</div>
+                    <div class="w-[90%] text-sky-400 leading-[15px] font-bold ont-mb-2">Rp. `+data[i].harga+`</div>
+                    <div class="py-2"><hr></div>
+                    <div class="flex justify-left items-center">
+                        <button class="px-4 py-1 rounded-[25px] `+warna+` text-white text-[10pt]">`+data[i].publik+`</button>
+                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                            <i class="las la-eye"></i>    
+                            <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].dilihat+`</span>
+                        </button>
+                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                            <i class="las la-file-invoice-dollar"></i> 
+                            <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].laku+`</span>
+                        </button>
+                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                            <i class="las la-box-open"></i>
+                            <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].stok+`</span>
+                        </button>
+                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                            <i class="las la-heart"></i>
+                            <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].disukai+`</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute right-0">
+                    <div>
+                        <button id="`+data[i].id+`" onClick="editProduk(this.id)" class="mr-[10px] mt-[-20px] text-gray-200 hover:text-green-400 font-bold text-[14pt]" title='edit'><i class="las la-edit"></i></button>
+                        <button id="`+data[i].id+`" onClick="deleteProduk(this.id)" class="mr-[20px] mt-[-20px] text-gray-200 hover:text-red-400 font-bold text-[14pt]" title='hapus'><i class="las la-times"></i></button>
+                    </div>
+                </div>
+                <div class="clear-both"></div>
+            </div>`;
+            document.getElementById('forSearch').innerHTML = result;
+            document.getElementById('showJumlah').innerHTML = data.length;
+        }
     }
 }
 
@@ -192,28 +255,35 @@ function tambahProduk(){
     document.getElementById('popup').innerHTML = `
         <div class="fixed top-[130px] left-0 right-0 z-[9999]">
             <div class="w-full flex justify-center item-center">
-                <div class="bg-white w-[400px] rounded-lg p-6 relative">
-                    <button class='absolute right-[15px] top-[10px] outline-none border-none' onClick='hidePopUp()'>
-                    <i class="las la-times"></i>
-                    </button>
-                    <div class="font-semibold text-[14pt] text-center">Tambah Produk</div>
-                    <div class="mt-2 text-center text-gray-400">
-                        Pastikan nama dan keterangan produk sesuai dengan yang akan dijual.
+                <div class="bg-white w-[400px] rounded-lg relative">
+                    <div class="px-6 pt-6">
+                        <button class='absolute right-[15px] top-[10px] outline-none border-none' onClick='hidePopUp()'>
+                        <i class="las la-times"></i>
+                        </button>
+                        <div class="font-semibold text-[14pt] text-center">Tambah Produk</div>
+                        <div class="mt-2 text-center text-gray-400">
+                            Pastikan nama dan keterangan produk sesuai dengan yang akan dijual.
+                        </div>
                     </div>
-                    <div class="mt-2">
+                    <div class="mt-2 p-6 max-h-[350px] overflow-auto">
                         <form onSubmit='return submitProduk()' method='post' action='' id='formProduk' name='formProduk'>
                             <div>
                                 <div class="mb-2">
+                                    <label for='nama' class="font-semibold text-[10pt]">Nama</label>
                                     <input class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='nama' name='nama' placeholder="Nama">
                                 </div>
                                 <div>
+                                    <label for='keterangan' class="font-semibold text-[10pt]">Keterangan</label>
                                     <textarea class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='keterangan' name='keterangan' placeholder="keterangan"></textarea>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2 mb-2">
+                                    <label for='harga' class="font-semibold text-[10pt]">Harga</label>
+                                    <label for='stok' class="font-semibold text-[10pt]">Stok</label>
                                     <input class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 rounded-md text-[10pt]' type='text' id='harga' name='harga' placeholder="harga">
                                     <input class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 rounded-md text-[10pt]' type='text' id='stok' name='stok' placeholder="stok">
                                 </div>
                                 <div class="mb-2">
+                                    <label for='kategori_id' class="font-semibold text-[10pt]">Kategori</label>
                                     <select class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='kategori_id' name='kategori_id'>
                                         <option value=''>Pilih Kategori Produk</option>
                                         <option value='1'>Aneka Kue</option>
@@ -226,7 +296,7 @@ function tambahProduk(){
                                     </select>
                                 </div>
                                 <div class="mt-2">
-                                    <label class="text-center block text-[10pt] text-bg-gray-200 mb-2 mt-2">Upload Gambar Produk</label>
+                                    <label for='gambar' class="font-semibold text-[10pt]">Gambar Produk</label>
                                     <input type='file' class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='gambar' name='gambar'>
                                 </div>
                                 <div class="text-center">
@@ -387,16 +457,21 @@ function editProduk(ID){
                             <form onSubmit='return submitEditProduk()' method='post' action='' id='formEditProduk' name='formEditProduk'>
                                 <div>
                                     <div class="mb-2">
+                                        <label for='nama' class="font-semibold text-[10pt]">Nama</label>
                                         <input class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='nama' name='nama' placeholder="Nama" value='`+data[0].nama+`'>
                                     </div>
                                     <div>
+                                        <label for='keterangan' class="font-semibold text-[10pt]">Keterangan</label>
                                         <textarea class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='keterangan' name='keterangan' placeholder="keterangan">`+data[0].keterangan+`</textarea>
                                     </div>
                                     <div class="grid grid-cols-2 gap-2 mb-2">
+                                        <label for='harga' class="font-semibold text-[10pt]">Harga</label>
+                                        <label for='stok' class="font-semibold text-[10pt]">Stok</label>
                                         <input class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 rounded-md text-[10pt]' type='text' id='harga' name='harga' placeholder="harga" value="`+data[0].harga+`">
                                         <input class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 rounded-md text-[10pt]' type='text' id='stok' name='stok' placeholder="stok" value="`+data[0].stok+`">
                                     </div>
                                     <div class="mb-2">
+                                        <label for='kategori_id' class="font-semibold text-[10pt]">Kategori</label>
                                         <select class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' id='kategori_id' name='kategori_id'>
                                             <option value='`+data[0].kid_value+`'>`+data[0].kid_label+`</option>
                                             <option value='1'>Aneka Kue</option>
@@ -409,6 +484,8 @@ function editProduk(ID){
                                         </select>
                                     </div>
                                     <div class="grid grid-cols-2 gap-2 mb-2">
+                                        <label for='nama' class="font-semibold text-[10pt]">Diskon</label>
+                                        <label for='nama' class="font-semibold text-[10pt]">Publikasi</label>
                                         <input class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='diskon' name='diskon' placeholder="Diskon" value='`+data[0].diskon+`'>
                                         <select class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]'id='publik' name='publik'>
                                             <option value='`+data[0].publik_value+`'>`+data[0].publik_label+`</option>
@@ -417,11 +494,12 @@ function editProduk(ID){
                                         </select>
                                     </div>
                                     <div class="mb-2">
+                                        <label for='nama' class="font-semibold text-[10pt]">Slug</label>
                                         <input class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='slug' name='slug' placeholder="Slug" value='`+data[0].slug+`'>
                                     </div>
                                     <div class="mt-2">
                                         <input type='hidden' id="id" name="id" value='`+data[0].id+`'>
-                                        <label class="text-center block text-[10pt] text-bg-gray-200 mb-2 mt-2">Upload Gambar Produk</label>
+                                        <label for='nama' class="font-semibold text-[10pt]">Ganti Gambar Produk</label>
                                         <input type='file' class='outline-none border-[1px] border-solid border-gray-300 py-2 px-3 w-full rounded-md text-[10pt]' type='text' id='gambar' name='gambar'>
                                     </div>
                                     <div class="text-center">

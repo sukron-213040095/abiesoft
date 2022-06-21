@@ -163,6 +163,42 @@ class ProdukController extends Controller
         echo json_encode($list);
     }
 
+    public static function search($keyword)
+    {
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE nama LIKE '%" . $keyword . "%' ");
+        $list = [];
+        foreach ($produk->hasil() as $p) {
+            if ($p->diskon == null) {
+                $diskon = 0;
+            } else {
+                $diskon = $p->diskon;
+            }
+            $kategori = DB::terhubung()->query("SELECT id, nama FROM kategori WHERE id = '" . $p->kategori_id . "' ");
+            foreach ($kategori->hasil() as $k) {
+                $klabel = $k->nama;
+            }
+            $items = new ProdukController();
+            $items->id = $p->id;
+            $items->nama = $p->nama;
+            $items->gambar = Config::envReader('BASEURL') . $p->gambar;
+            $items->keterangan = $p->keterangan;
+            $items->harga = $p->harga;
+            $items->stok = $p->stok;
+            $items->laku = $p->laku;
+            $items->dilihat = $p->dilihat;
+            $items->disukai = $p->disukai;
+            $items->diskon = $diskon;
+            $items->kid_value = $p->kategori_id;
+            $items->kid_label = $klabel;
+            $items->publik_value = $p->publik;
+            $items->publik_label = ucfirst($p->publik);
+            $items->slug = $p->slug;
+            $items->users_id = $p->users_id;
+            $list[] = $items;
+        }
+        echo json_encode($list);
+    }
+
     public static function update($id)
     {
         $id = Input::get('id');

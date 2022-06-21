@@ -238,10 +238,12 @@ class WebserviceController extends Controller
     {
         $whatToDo = Input::get('do');
         $id = Input::get('id');
+        $keyword = Input::get('keyword');
         if (AuthController::isLogin()) {
             return match ($whatToDo) {
                 'delete' => ProdukController::delete($id),
                 'read' => ProdukController::read($id),
+                'search' => ProdukController::search($keyword),
                 default => $this->error()
             };
         } else {

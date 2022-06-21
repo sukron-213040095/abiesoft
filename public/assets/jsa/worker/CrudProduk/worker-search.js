@@ -1,0 +1,9 @@
+onmessage = function(e) {
+    fetch(e.data[0] + '/webservice/produk?apikey='+ e.data[1] +'&keyword='+e.data[2]+'&do=search')
+        .then(response => response.json())
+        .then(data => {
+            postMessage(data)
+        })
+        .catch(error => console.error(error));
+}
+
