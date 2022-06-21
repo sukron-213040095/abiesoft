@@ -231,17 +231,21 @@ class WebserviceController extends Controller
 
     protected function listkategori($slug)
     {
-        $data = [
-            [
-                'id' => 1,
-                'nama' => 'Kue Ulang Tahun Redvelvet 1',
-                'slug' => 'Kue-Ulang-Tahun-Redvelvet-1',
-                'gambar' => Config::envReader('BASEURL') . '/assets/storage/images/ultah_4.jpg',
-                'keterangan' => 'Basic Kue Redvelvet, Toping, Bonus topper, pisau plastik dan..',
-                'harga' => 130000
-            ]
-        ];
-        echo json_encode($data);
+        return KategoriController::items($slug);
+    }
+
+    public function doProduk()
+    {
+        $whatToDo = Input::get('do');
+        $id = Input::get('id');
+        if (AuthController::isLogin()) {
+            return match ($whatToDo) {
+                'hapus' => ProdukController::hapus($id),
+                default => $this->error()
+            };
+        } else {
+            echo "Token Expire";
+        }
     }
 
     protected function palinglaku()

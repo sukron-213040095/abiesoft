@@ -33,13 +33,42 @@ class ProdukController extends Controller
         if (Metafile::approver('gambar', $nama, $ukuran) == "diijinkan") {
             if (move_uploaded_file($tmp_name, $target)) {
 
+                $finalSlug = "";
+                $slug = "";
+                $expNama = explode(" ", $namaproduk);
+                $no = 1;
+                for ($i = 0; $i < count($expNama); $i++) {
+                    if (count($expNama) == $no) {
+                        if (count($expNama) == 1) {
+                            $slug .= "-" . strtolower($expNama[$i]);
+                        } else {
+                            $slug .= strtolower($expNama[$i]);
+                        }
+                    } else {
+                        $slug .= strtolower($expNama[$i]) . "-";
+                    }
+                    $no++;
+                }
+
+                $cekslug = DB::terhubung()->query("SELECT slug FROM produk WHERE slug = '" . $slug . "' ");
+                if ($cekslug->hitung()) {
+                    if (substr($slug, 0, 1) == "-") {
+                        $slug = substr($slug, 1, strlen($slug));
+                    }
+                    $finalSlug =  $slug . "-" . date('YmdHis');
+                } else {
+                    $finalSlug = $slug;
+                }
+
                 $input = DB::terhubung()->input('produk', array(
                     'nama' => $namaproduk,
                     'keterangan' => $keterangan,
                     'harga' => $harga,
                     'stok' => $stok,
                     'kategori_id' => $kategori_id,
-                    'gambar' => "/assets" . explode("assets", $target)[1]
+                    'gambar' => "/assets" . explode("assets", $target)[1],
+                    'slug' => $finalSlug,
+                    'users_id' => AuthController::getID()
                 ));
                 if ($input) {
                     return self::tab();
@@ -53,7 +82,7 @@ class ProdukController extends Controller
             } else {
                 $data = [
                     [
-                        'status' => 'Cancel'
+                        'status' => 'Disini'
                     ]
                 ];
             }
@@ -70,7 +99,6 @@ class ProdukController extends Controller
     public static function tab()
     {
         $produk = DB::terhubung()->query("SELECT * FROM produk ORDER BY id DESC");
-
         $list = [];
         foreach ($produk->hasil() as $p) {
             $items = new ProdukController();
@@ -87,5 +115,20 @@ class ProdukController extends Controller
             $list[] = $items;
         }
         echo json_encode($list);
+    }
+
+    public static function hapus($id)
+    {
+        $cekuser = DB::terhubung()->query("SELECT id, users_id FROM produk WHERE id='" . $id . "' AND users_id = '" . AuthController::getID() . "' ");
+        if ($cekuser->hitung()) {
+            $hapus = DB::terhubung()->hapus('produk', array('id', '=', $id));
+            if ($hapus) {
+                echo "Berhasil";
+            } else {
+                echo "Token Expire";
+            }
+        } else {
+            echo "Token Expire";
+        }
     }
 }

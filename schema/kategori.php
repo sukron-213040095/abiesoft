@@ -12,6 +12,7 @@ class kategori
         $sql = 'CREATE TABLE kategori ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
             nama VARCHAR(30) NOT NULL,
+            slug VARCHAR(50) NOT NULL UNIQUE,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 
         )';
@@ -23,25 +24,32 @@ class kategori
     public static function buatdata()
     {
         DB::terhubung()->input('kategori', array(
-            'nama' => 'Aneka Kue'
+            'nama' => 'Aneka Kue',
+            'slug' => 'aneka-kue',
         ));
         DB::terhubung()->input('kategori', array(
-            'nama' => 'Kue Pengantin'
+            'nama' => 'Kue Pengantin',
+            'slug' => 'kue-pengantin'
         ));
         DB::terhubung()->input('kategori', array(
-            'nama' => 'Kue Khitan'
+            'nama' => 'Kue Khitan',
+            'slug' => 'kue-khitan'
         ));
         DB::terhubung()->input('kategori', array(
-            'nama' => 'Kue Ulang Tahun'
+            'nama' => 'Kue Ulang Tahun',
+            'slug' => 'kue-ulang-tahun'
         ));
         DB::terhubung()->input('kategori', array(
-            'nama' => 'Tumpeng'
+            'nama' => 'Tumpeng',
+            'slug' => '-tumpeng'
         ));
         DB::terhubung()->input('kategori', array(
-            'nama' => 'Puding'
+            'nama' => 'Pudding',
+            'slug' => '-pudding'
         ));
         DB::terhubung()->input('kategori', array(
-            'nama' => 'Snack Box'
+            'nama' => 'Snack Box',
+            'slug' => 'snack-box'
         ));
     }
 }

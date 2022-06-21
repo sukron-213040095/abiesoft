@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use AbieSoft\Http\Controller;
+use AbieSoft\Mysql\DB;
+use AbieSoft\Utilities\Config;
 use AbieSoft\Utilities\GetUri;
 
 class KategoriController extends Controller
@@ -22,6 +24,37 @@ class KategoriController extends Controller
             'slug' => $slug,
             'authButton' => \App\Controllers\TemplateController::authButton()
         ]);
+    }
+
+    public static function items($slug)
+    {
+
+        $idKategori =
+            $IdBySlug = DB::terhubung()->query("SELECT id,slug FROM kategori WHERE slug = '" . $slug . "' ");
+
+        if ($IdBySlug->hitung()) {
+            foreach ($IdBySlug->hasil() as $slg) {
+                $idKategori = $slg->id;
+            }
+        }
+
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE kategori_id = '" . $idKategori . "' ORDER BY id DESC");
+        $list = [];
+        foreach ($produk->hasil() as $p) {
+            $items = new ProdukController();
+            $items->id = $p->id;
+            $items->nama = $p->nama;
+            $items->gambar = $p->gambar;
+            $items->keterangan = $p->keterangan;
+            $items->harga = $p->harga;
+            $items->stok = $p->stok;
+            $items->laku = $p->laku;
+            $items->dilihat = $p->dilihat;
+            $items->disukai = $p->disukai;
+            $items->publik = $p->publik;
+            $list[] = $items;
+        }
+        echo json_encode($list);
     }
 
     public function list()

@@ -336,7 +336,9 @@ function showTabProduk (){
                     </div>
                 </div>
                 <div class="absolute right-0">
-                    <button class="mr-[20px] mt-[-20px] text-gray-200 hover:text-gray-600 font-bold"><i class="las la-times"></i></button>
+                    <div>
+                        <button id="`+data[i].id+`" onClick="deleteProduk(this.id)" class="mr-[20px] mt-[-20px] text-gray-200 hover:text-gray-600 font-bold"><i class="las la-times"></i></button>
+                    </div>
                 </div>
                 <div class="clear-both"></div>
             </div>`;
@@ -475,6 +477,23 @@ function submitProduk(){
         });
         return false;
     }
+}
+
+function deleteProduk(ID){
+    let doAction =  BASEURL + "/webservice/produk?apikey="+APIKEY+"&id="+ID+"&do=hapus";
+    $.ajax({
+        url: doAction,
+        type: "GET",
+        success: function(msg) {
+            if(msg == "Berhasil"){
+                showTabProduk();
+                toastr.success("Produk sudah dihapus");
+            }else{
+                toastr.error(msg);
+            }
+        },
+    });
+    return false;
 }
 
 function showTabAlamat (){
