@@ -6,11 +6,34 @@ use AbieSoft\Auth\AuthController;
 use AbieSoft\Http\Controller;
 use AbieSoft\Mysql\DB;
 use AbieSoft\Utilities\Config;
+use AbieSoft\Utilities\Format;
+use AbieSoft\Utilities\GetUri;
 use AbieSoft\Utilities\Input;
 use AbieSoft\Utilities\Metafile;
 
 class ProdukController extends Controller
 {
+    public function detail()
+    {
+        $slug = GetUri::slug();
+        $ce = count(explode("-", $slug));
+        $nama = "";
+        for ($i = 0; $i < $ce; $i++) {
+            $nama .= ucfirst(explode("-", $slug)[$i]) . " ";
+        }
+        $id = "";
+        $cekId = DB::terhubung()->query("SELECT * FROM produk WHERE slug='" . $slug . "' ");
+        foreach ($cekId->hasil() as $c) {
+            $id = $c->id;
+        }
+        return $this->view(page: 'produk/detail', data: [
+            'title' => 'Detail Produk',
+            'id' => $id,
+            'nama' => $nama,
+            'slug' => $slug,
+            'authButton' => \App\Controllers\TemplateController::authButton()
+        ]);
+    }
 
     public static function new()
     {
@@ -109,10 +132,10 @@ class ProdukController extends Controller
 
             $items = new ProdukController();
             $items->id = $p->id;
-            $items->nama = $p->nama;
+            $items->nama = Format::simpel($p->nama, 30);
             $items->gambar = $p->gambar;
-            $items->keterangan = $p->keterangan;
-            $items->harga = $p->harga;
+            $items->keterangan = Format::simpel($p->keterangan, 50);
+            $items->harga = Format::uang($p->harga);
             $items->stok = $p->stok;
             $items->laku = $p->laku;
             $items->dilihat = $p->dilihat;
@@ -163,6 +186,58 @@ class ProdukController extends Controller
         echo json_encode($list);
     }
 
+    public static function only($id)
+    {
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE id = '" . $id . "' ");
+        $list = [];
+        foreach ($produk->hasil() as $p) {
+            if ($p->diskon == null) {
+                $diskon = 0;
+            } else {
+                $diskon = $p->diskon;
+            }
+            $puser = "";
+            $nuser = "";
+            $user = DB::terhubung()->query("SELECT id,nama,photo FROM users WHERE id = '" . $p->users_id . "' ");
+            if ($user->hitung()) {
+                foreach ($user->hasil() as $u) {
+                    $filephoto = __DIR__ . "/../public";
+                    $pp = "";
+
+                    if ($u->photo) {
+                        if (file_exists($filephoto . $u->photo)) {
+                            $pp = \AbieSoft\Utilities\Config::envReader('BASEURL') . $u->photo;
+                        } else {
+                            $pp = \AbieSoft\Utilities\Config::envReader('BASEURL') . "/assets/media/photo/default.png";
+                        }
+                    } else {
+                        $pp = \AbieSoft\Utilities\Config::envReader('BASEURL') . "/assets/media/photo/default.png";
+                    }
+
+                    $puser = $pp;
+                    $nuser = $u->nama;
+                }
+            } else {
+                $puser = \AbieSoft\Utilities\Config::envReader('BASEURL') . "/assets/media/photo/default.png";
+                $nuser = "Default User";
+            }
+            $items = new ProdukController();
+            $items->id = $p->id;
+            $items->nama = $p->nama;
+            $items->gambar = Config::envReader('BASEURL') . $p->gambar;
+            $items->keterangan = $p->keterangan;
+            $items->harga = $p->harga;
+            $items->laku = $p->laku;
+            $items->suka = $p->disukai;
+            $items->stok = $p->stok;
+            $items->diskon = $diskon;
+            $items->photouser = $puser;
+            $items->namauser = $nuser;
+            $list[] = $items;
+        }
+        echo json_encode($list);
+    }
+
     public static function search($keyword)
     {
         $produk = DB::terhubung()->query("SELECT * FROM produk WHERE nama LIKE '%" . $keyword . "%' ");
@@ -179,19 +254,17 @@ class ProdukController extends Controller
             }
             $items = new ProdukController();
             $items->id = $p->id;
-            $items->nama = $p->nama;
-            $items->gambar = Config::envReader('BASEURL') . $p->gambar;
-            $items->keterangan = $p->keterangan;
-            $items->harga = $p->harga;
+            $items->nama = Format::simpel($p->nama, 30);
+            $items->gambar = $p->gambar;
+            $items->keterangan = Format::simpel($p->keterangan, 50);
+            $items->harga = Format::uang($p->harga);
             $items->stok = $p->stok;
             $items->laku = $p->laku;
             $items->dilihat = $p->dilihat;
             $items->disukai = $p->disukai;
             $items->diskon = $diskon;
-            $items->kid_value = $p->kategori_id;
-            $items->kid_label = $klabel;
-            $items->publik_value = $p->publik;
-            $items->publik_label = ucfirst($p->publik);
+            $items->kategori_id = $p->kategori_id;
+            $items->publik = $p->publik;
             $items->slug = $p->slug;
             $items->users_id = $p->users_id;
             $list[] = $items;
@@ -235,7 +308,8 @@ class ProdukController extends Controller
                             'diskon' => Input::get('diskon'),
                             'publik' => Input::get('publik'),
                             'slug' => Input::get('slug'),
-                            'gambar' => "/assets" . explode("assets", $target)[1]
+                            'gambar' => "/assets" . explode("assets", $target)[1],
+                            'diupdate' => date('Y-m-d H:i:s')
                         ));
                         if ($perbarui) {
                             $result = [
@@ -274,6 +348,7 @@ class ProdukController extends Controller
                     'diskon' => Input::get('diskon'),
                     'publik' => Input::get('publik'),
                     'slug' => Input::get('slug'),
+                    'diupdate' => date('Y-m-d H:i:s')
                 ));
                 if ($perbarui) {
                     $result = [

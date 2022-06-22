@@ -28,10 +28,10 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 9 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 785 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 786 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 790 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 791 */;
 		echo "\n";
-		$this->renderBlock('footer', get_defined_vars()) /* line 790 */;
+		$this->renderBlock('footer', get_defined_vars()) /* line 795 */;
 	}
 
 
@@ -73,6 +73,10 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
 	/** {block content} on line 9 */
 	public function blockContent(array $ʟ_args): void
 	{
+		extract($this->params);
+		extract($ʟ_args);
+		unset($ʟ_args);
+
 		echo '    <div class="float w-[1100px] ml-auto mr-auto">
         <div class="owl-carousel">
             <div><img src="';
@@ -129,7 +133,9 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
                 </a>
             </div>
         </div>
-        <div class="palinglaku mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 50%);">
+';
+		if ($palinglaku != null) /* line 51 */ {
+			echo '        <div class="palinglaku mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 50%);">
             <h2 class="pb-[40px] text-center w-full block font-semibold text-[20pt]">Paling Laku</h2>
             <div id=\'dataPalingLaku\'>
                 <div class="grid grid-cols-6 gap-4">
@@ -215,7 +221,11 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
             </div>
         </div>
 
-        <div class="lagipromo mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 50%);">
+';
+		}
+		echo "\n";
+		if ($diskon != null) /* line 140 */ {
+			echo '        <div class="lagipromo mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 50%);">
             <h2 class="pb-[40px] text-center w-full block font-bold text-[20pt]">Lagi Promo Nie.. Lumayan Hemat Beberapa Persen. Ayo!</h2>
             <div id=\'dataDiskon\'>
                 <div class="grid grid-cols-6 gap-4">
@@ -300,7 +310,9 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
                 </div>
             </div>
         </div>
-
+';
+		}
+		echo '
         <div><hr></div>
 
         <div class="AllItem mt-8 mb-8">
@@ -865,23 +877,23 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
 	}
 
 
-	/** {block pluginjs} on line 785 */
+	/** {block pluginjs} on line 790 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 786 */
+	/** {block pagejs} on line 791 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		echo '    <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 787 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 792 */;
 		echo '/assets/jsa/home/carousel.js"></script>
 ';
 	}
 
 
-	/** {block footer} on line 790 */
+	/** {block footer} on line 795 */
 	public function blockFooter(array $ʟ_args): void
 	{
 	}

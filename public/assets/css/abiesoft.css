@@ -11,3 +11,7 @@
 @keyframes shimmer {
     100% {-webkit-mask-position:left}
 }
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }

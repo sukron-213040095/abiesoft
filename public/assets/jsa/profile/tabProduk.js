@@ -1,95 +1,38 @@
 function showTabProduk (){
 
+    document.getElementById('btnProduk').setAttribute('class', 'cursor-pointer px-6 text-gray-300 text-sky-400 font-semibold border-b-[2px] border-solid border-sky-400 pt-4 pb-[14px]');
+    document.getElementById('btnAlamat').setAttribute('class', 'cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold');
+    document.getElementById('btnBiodata').setAttribute('class', 'cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold');
+    document.getElementById('btnPembayaran').setAttribute('class', 'cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold');
+
     document.getElementById('profilDetail').innerHTML = `
         <div class="p-6">
             <div class="grid grid-cols-3 gap-4">
                 <div>
                     <div class='w-full text-center'>
-                        <div class="text-[10pt] leading-[15px] mb-[5px]"><div class='h-[8pt] w-[80px] bg-slate-100 shimmer'></div></div>
-                        <div class="font-bold text-[16pt] leading-[15px] w-full text-sky-400"><div class='h-[14pt] w-[100px] bg-slate-100 shimmer'></div></div>
+                        <div class="text-[10pt] leading-[15px] mb-[5px]">Jumlah Data</div>
+                        <div class="font-bold text-[16pt] leading-[15px] w-full text-sky-400" id='showJumlah'>0</div>
                     </div>
                 </div>
                 <div>
-                <div class='h-[20pt] w-[full] bg-slate-100 shimmer'></div>
+                    <input type='text' class="border-[1px] border-solid border-slate-200 outline-none rounded-md px-4 py-2 focus:border-gray-200 focus:bg-gray-50" placeholder="Cari Produk" onKeyUp='cariProduk(this.value)'>
                 </div>
                 <div class="text-center">
-                <div class='h-[15pt] w-[70%] bg-slate-100 shimmer'></div>
+                    <button onClick="tambahProduk()" class="bg-sky-400 hover:bg-sky-300 text-white px-3 py-1 rounded-md">Tambah Produk</button>
                 </div>
             </div>
         </div>
-        <div class="p-6 border-b-[1px] border-solid border-slate-200 hover:bg-slate-50 relative">
-            <div class="float-left w-[90px] h-[90px] bg-slate-100 ">
-            <div class='h-[90px] w-[90px] bg-slate-100 shimmer'></div>
-            </div>
-            <div class="float-left ml-[20px]">
-                <h2 class="font-semibold text-[12pt] leading-[15px] mb-2"><div class='h-[15pt] w-[70%] bg-slate-100 shimmer'></div></h2>
-                <div class="w-[90%] text-gray-400 leading-[15px] mb-2"><div class='h-[25pt] w-full bg-slate-100 shimmer'></div></div>
-                <div class="w-[90%] text-sky-400 leading-[15px] font-bold ont-mb-2"><div class='h-[20pt] w-[300px] bg-slate-100 shimmer'></div></div>
-                <div class="py-2"><hr></div>
-                <div class="flex justify-left items-center">
-                    <button class="px-4 py-1 rounded-[25px]  text-white text-[10pt]"><div class='h-[15pt] w-[200px] bg-slate-100 shimmer'></div></button>
-                    <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center"> 
-                        <span class='text-[10pt] ml-[5px] font-semibold'><div class='h-[15pt] w-[300px] bg-slate-100 shimmer'></div></span>
-                    </button>
-                </div>
-            </div>
-            <div class="clear-both"></div>
-        </div>
-        <div class="p-6 border-b-[1px] border-solid border-slate-200 hover:bg-slate-50 relative">
-            <div class="float-left w-[90px] h-[90px] bg-slate-100 ">
-            <div class='h-[90px] w-[90px] bg-slate-100 shimmer'></div>
-            </div>
-            <div class="float-left ml-[20px]">
-                <h2 class="font-semibold text-[12pt] leading-[15px] mb-2"><div class='h-[15pt] w-[70%] bg-slate-100 shimmer'></div></h2>
-                <div class="w-[90%] text-gray-400 leading-[15px] mb-2"><div class='h-[25pt] w-full bg-slate-100 shimmer'></div></div>
-                <div class="w-[90%] text-sky-400 leading-[15px] font-bold ont-mb-2"><div class='h-[20pt] w-[300px] bg-slate-100 shimmer'></div></div>
-                <div class="py-2"><hr></div>
-                <div class="flex justify-left items-center">
-                    <button class="px-4 py-1 rounded-[25px]  text-white text-[10pt]"><div class='h-[15pt] w-[200px] bg-slate-100 shimmer'></div></button>
-                    <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center"> 
-                        <span class='text-[10pt] ml-[5px] font-semibold'><div class='h-[15pt] w-[300px] bg-slate-100 shimmer'></div></span>
-                    </button>
-                </div>
-            </div>
-            <div class="clear-both"></div>
-        </div>
-        <div class="p-6 border-b-[1px] border-solid border-slate-200 hover:bg-slate-50 relative">
-            <div class="float-left w-[90px] h-[90px] bg-slate-100 ">
-            <div class='h-[90px] w-[90px] bg-slate-100 shimmer'></div>
-            </div>
-            <div class="float-left ml-[20px]">
-                <h2 class="font-semibold text-[12pt] leading-[15px] mb-2"><div class='h-[15pt] w-[70%] bg-slate-100 shimmer'></div></h2>
-                <div class="w-[90%] text-gray-400 leading-[15px] mb-2"><div class='h-[25pt] w-full bg-slate-100 shimmer'></div></div>
-                <div class="w-[90%] text-sky-400 leading-[15px] font-bold ont-mb-2"><div class='h-[20pt] w-[300px] bg-slate-100 shimmer'></div></div>
-                <div class="py-2"><hr></div>
-                <div class="flex justify-left items-center">
-                    <button class="px-4 py-1 rounded-[25px]  text-white text-[10pt]"><div class='h-[15pt] w-[200px] bg-slate-100 shimmer'></div></button>
-                    <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center"> 
-                        <span class='text-[10pt] ml-[5px] font-semibold'><div class='h-[15pt] w-[300px] bg-slate-100 shimmer'></div></span>
-                    </button>
-                </div>
-            </div>
-            <div class="clear-both"></div>
-        </div>
-        <div class="p-6 border-b-[1px] border-solid border-slate-200 hover:bg-slate-50 relative">
-            <div class="float-left w-[90px] h-[90px] bg-slate-100 ">
-            <div class='h-[90px] w-[90px] bg-slate-100 shimmer'></div>
-            </div>
-            <div class="float-left ml-[20px]">
-                <h2 class="font-semibold text-[12pt] leading-[15px] mb-2"><div class='h-[15pt] w-[70%] bg-slate-100 shimmer'></div></h2>
-                <div class="w-[90%] text-gray-400 leading-[15px] mb-2"><div class='h-[25pt] w-full bg-slate-100 shimmer'></div></div>
-                <div class="w-[90%] text-sky-400 leading-[15px] font-bold ont-mb-2"><div class='h-[20pt] w-[300px] bg-slate-100 shimmer'></div></div>
-                <div class="py-2"><hr></div>
-                <div class="flex justify-left items-center">
-                    <button class="px-4 py-1 rounded-[25px]  text-white text-[10pt]"><div class='h-[15pt] w-[200px] bg-slate-100 shimmer'></div></button>
-                    <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center"> 
-                        <span class='text-[10pt] ml-[5px] font-semibold'><div class='h-[15pt] w-[300px] bg-slate-100 shimmer'></div></span>
-                    </button>
-                </div>
-            </div>
-            <div class="clear-both"></div>
-        </div>
-        <div class="p-6 border-b-[1px] border-solid border-slate-200 hover:bg-slate-50 relative">
+        <div id='forSearch'></div>
+    `;
+    showProduk();
+    
+}
+
+function showProduk (){
+    /// Produk
+
+    document.getElementById('forSearch').innerHTML = `
+        <div class="p-6 border-b-[1px] border-solid border-slate-200 relative">
             <div class="float-left w-[90px] h-[90px] bg-slate-100 ">
             <div class='h-[90px] w-[90px] bg-slate-100 shimmer'></div>
             </div>
@@ -109,35 +52,11 @@ function showTabProduk (){
         </div>
     `;
 
-
-    document.getElementById('btnProduk').setAttribute('class', 'cursor-pointer px-6 text-gray-300 text-sky-400 font-semibold border-b-[2px] border-solid border-sky-400 pt-4 pb-[14px]');
-    document.getElementById('btnAlamat').setAttribute('class', 'cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold');
-    document.getElementById('btnBiodata').setAttribute('class', 'cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold');
-    document.getElementById('btnPembayaran').setAttribute('class', 'cursor-pointer py-4 px-6 text-gray-300 hover:text-gray-500 font-semibold');
-    /// Produk
+    let result = "";
     let produk = new Worker(BASEURL+'/assets/jsa/worker/worker-produk.js');
     produk.postMessage([BASEURL,APIKEY]);
     produk.onmessage = function(e) {
         let data = e.data;
-        let result = "";
-        result += `<div class="p-6">
-            <div class="grid grid-cols-3 gap-4">
-                <div>
-                    <div class='w-full text-center'>
-                        <div class="text-[10pt] leading-[15px] mb-[5px]">Jumlah Data</div>
-                        <div class="font-bold text-[16pt] leading-[15px] w-full text-sky-400" id='showJumlah'>`+data.length+`</div>
-                    </div>
-                </div>
-                <div>
-                    <input type='text' class="border-[1px] border-solid border-slate-200 outline-none rounded-md px-4 py-2 focus:border-gray-200 focus:bg-gray-50" placeholder="Cari Produk" onKeyUp='cariProduk(this.value)'>
-                </div>
-                <div class="text-center">
-                    <button onClick="tambahProduk()" class="bg-sky-400 hover:bg-sky-300 text-white px-3 py-1 rounded-md">Tambah Produk</button>
-                </div>
-            </div>
-        </div>
-        <div id='forSearch'>
-        `;
         for(let i = 0; i < data.length; i++){
 
             let warna = "bg-green-400";
@@ -158,23 +77,23 @@ function showTabProduk (){
                     <div class="w-[90%] text-sky-400 leading-[15px] font-bold ont-mb-2">Rp. `+data[i].harga+`</div>
                     <div class="py-2"><hr></div>
                     <div class="flex justify-left items-center">
-                        <button class="px-4 py-1 rounded-[25px] `+warna+` text-white text-[10pt]">`+data[i].publik+`</button>
-                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                        <div class="px-4 py-1 rounded-[25px] `+warna+` text-white text-[10pt]">`+data[i].publik+`</div>
+                        <div class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
                             <i class="las la-eye"></i>    
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].dilihat+`</span>
-                        </button>
-                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                        </div>
+                        <div class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
                             <i class="las la-file-invoice-dollar"></i> 
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].laku+`</span>
-                        </button>
-                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                        </div>
+                        <div class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
                             <i class="las la-box-open"></i>
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].stok+`</span>
-                        </button>
-                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                        </div>
+                        <div class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
                             <i class="las la-heart"></i>
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].disukai+`</span>
-                        </button>
+                        </div>
                     </div>
                 </div>
                 <div class="absolute right-0">
@@ -186,8 +105,8 @@ function showTabProduk (){
                 <div class="clear-both"></div>
             </div>`;
         }
-        result +=`</div>`;
-        document.getElementById('profilDetail').innerHTML = result;
+        document.getElementById('forSearch').innerHTML = result;
+        document.getElementById('showJumlah').innerHTML = data.length;
     }
 }
 
@@ -218,23 +137,23 @@ function cariProduk(KEYWORD){
                     <div class="w-[90%] text-sky-400 leading-[15px] font-bold ont-mb-2">Rp. `+data[i].harga+`</div>
                     <div class="py-2"><hr></div>
                     <div class="flex justify-left items-center">
-                        <button class="px-4 py-1 rounded-[25px] `+warna+` text-white text-[10pt]">`+data[i].publik+`</button>
-                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                        <div class="px-4 py-1 rounded-[25px] `+warna+` text-white text-[10pt]">`+data[i].publik+`</div>
+                        <div class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
                             <i class="las la-eye"></i>    
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].dilihat+`</span>
-                        </button>
-                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                        </div>
+                        <div class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
                             <i class="las la-file-invoice-dollar"></i> 
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].laku+`</span>
-                        </button>
-                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                        </div>
+                        <div class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
                             <i class="las la-box-open"></i>
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].stok+`</span>
-                        </button>
-                        <button class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
+                        </div>
+                        <div class="px-2 py-1 rounded-[25px] text-[14pt] flex justify-center items-center">
                             <i class="las la-heart"></i>
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[i].disukai+`</span>
-                        </button>
+                        </div>
                     </div>
                 </div>
                 <div class="absolute right-0">
@@ -371,7 +290,7 @@ function submitProduk(){
                 harga.value = "";
                 stok.value = "";
                 gambar.value = "";
-                showTabProduk();
+                showProduk();
             }
         })
         .catch(error => {
@@ -585,7 +504,7 @@ function deleteProduk(ID){
     hapusproduk.onmessage = function(e) {
         let data = e.data;
         if(data[0].message == "Berhasil"){
-            showTabProduk();
+            showProduk();
             toastr.success("Produk sudah dihapus");
         }else{
             toastr.error(data[0].message);

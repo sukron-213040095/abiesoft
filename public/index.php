@@ -4,6 +4,7 @@ date_default_timezone_set("Asia/Bangkok");
 use AbieSoft\AbieSoftAppSystem;
 use AbieSoft\Http\Route;
 use AbieSoft\Auth\AuthController;
+use AbieSoft\Http\Lanjut;
 use AbieSoft\Utilities\Define;
 use App\Controllers\HomeController;
 use App\Controllers\KategoriController;
@@ -32,7 +33,14 @@ use App\Controllers\ProfileController;
 */
 
 Route::get('/profile', [ProfileController::class, 'detail']);
+Route::get('/kategori', function () {
+    Lanjut::ke('/');
+});
+Route::get('/produk', function () {
+    Lanjut::ke('/');
+});
 Route::get('/kategori/{:nama}', [KategoriController::class, 'index']);
+Route::get('/produk/{:nama}', [ProdukController::class, 'detail']);
 Route::post('/produk/new', [ProdukController::class, 'new']);
 Route::post('/produk/update', [ProdukController::class, 'update']);
 
@@ -40,7 +48,7 @@ Route::post('/produk/update', [ProdukController::class, 'update']);
 /*
     Setingan Bawaan
     berisi halaman default
-    yang disetiakan sistem
+    yang disediakan sistem
 */
 
 Route::get('/', [HomeController::class, 'index']);

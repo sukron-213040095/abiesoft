@@ -11,7 +11,7 @@ class alamat
     {
         $sql = 'CREATE TABLE alamat ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            nama VARCHAR(30) NOT NULL,
+            nama VARCHAR(255) NOT NULL,
             alamat TEXT NOT NULL,
             nohp VARCHAR(13) NOT NULL,
             users_id INT(6) NOT NULL,

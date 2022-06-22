@@ -91,8 +91,12 @@ if($('#dataPalingLaku').length){
         let result = "";
         result += `<div class="grid grid-cols-6 gap-4">`;
         for(let i=0; i < data.length; i++){
+            let diskon = "";
+            if(data[i].diskon != "0%"){
+                diskon = data[i].diskon;
+            }
             result += `
-            <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/aneka-bolu" class="bg-white cursor-pointer rounded-md overflow-hidden hover:shadow-lg border-solid border-[2px] border-white hover:border-solid hover:border-[2px] hover:border-sky-300">
+            <a href="`+BASEURL+`/produk/`+data[i].slug+`" class="bg-white cursor-pointer rounded-md overflow-hidden hover:shadow-lg border-solid border-[2px] border-white hover:border-solid hover:border-[2px] hover:border-sky-300">
                 <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
                     <img src="`+data[i].gambar+`" class="w-[200px] h-[180px] object-cover">
                 </div>
@@ -101,7 +105,7 @@ if($('#dataPalingLaku').length){
                     <p class="text-[8pt] text-justify my-2 leading-[15px]">`+data[i].keterangan+`</p>
                     <div class="flex justify-between items-center">
                         <div class="text-[12pt] font-bold text-sky-500">Rp. `+data[i].harga+`</div>
-                        <div class="text-[14pt] font-bold text-red-500"></div>
+                        <div class="text-[14pt] font-bold text-red-500">`+diskon+`</div>
                     </div>
                 </div>
             </a>`;    
@@ -122,7 +126,7 @@ if($('#dataDiskon').length){
         result += `<div class="grid grid-cols-6 gap-4">`;
         for(let i=0; i < data.length; i++){
             result += `
-            <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/aneka-bolu" class="bg-white cursor-pointer rounded-md overflow-hidden hover:shadow-lg border-solid border-[2px] border-white hover:border-solid hover:border-[2px] hover:border-sky-300">
+            <a href="`+BASEURL+`/produk/`+data[i].slug+`" class="bg-white cursor-pointer rounded-md overflow-hidden hover:shadow-lg border-solid border-[2px] border-white hover:border-solid hover:border-[2px] hover:border-sky-300">
                 <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
                     <img src="`+data[i].gambar+`" class="w-[200px] h-[180px] object-cover">
                 </div>
@@ -151,8 +155,12 @@ if($('#dataTerbaru').length){
         let result = "";
         result += `<div class="grid grid-cols-6 gap-4">`;
         for(let i=0; i < data.length; i++){
+            let diskon = "";
+            if(data[i].diskon != "0%"){
+                diskon = data[i].diskon;
+            }
             result += `
-            <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/kategori/aneka-bolu" class="bg-white cursor-pointer rounded-md overflow-hidden hover:shadow-lg border-solid border-[2px] border-white hover:border-solid hover:border-[2px] hover:border-sky-300">
+            <a href="`+BASEURL+`/produk/`+data[i].slug+`" class="bg-white cursor-pointer rounded-md overflow-hidden hover:shadow-lg border-solid border-[2px] border-white hover:border-solid hover:border-[2px] hover:border-sky-300">
                 <div class="w-full h-[180px] rounded-tl-md rounded-tr-md overflow-hidden">
                     <img src="`+data[i].gambar+`" class="w-[200px] h-[180px] object-cover">
                 </div>
@@ -161,7 +169,7 @@ if($('#dataTerbaru').length){
                     <p class="text-[8pt] text-justify my-2 leading-[15px]">`+data[i].keterangan+`</p>
                     <div class="flex justify-between items-center">
                         <div class="text-[12pt] font-bold text-sky-500">Rp. `+data[i].harga+`</div>
-                        <div class="text-[14pt] font-bold text-red-500"></div>
+                        <div class="text-[14pt] font-bold text-red-500">`+diskon+`</div>
                     </div>
                 </div>
             </a>`;    

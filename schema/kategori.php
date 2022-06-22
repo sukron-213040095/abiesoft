@@ -24,8 +24,8 @@ class kategori
     public static function buatdata()
     {
         DB::terhubung()->input('kategori', array(
-            'nama' => 'Aneka Kue',
-            'slug' => 'aneka-kue',
+            'nama' => 'Aneka Bolu',
+            'slug' => 'aneka-bolu',
         ));
         DB::terhubung()->input('kategori', array(
             'nama' => 'Kue Pengantin',

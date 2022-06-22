@@ -11,7 +11,7 @@ class pembayaran
     {
         $sql = 'CREATE TABLE pembayaran ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            nama VARCHAR(30) NOT NULL,
+            nama VARCHAR(255) NOT NULL,
             icon TEXT NOT NULL,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 

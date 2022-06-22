@@ -107,17 +107,7 @@ final class Templatefcdc422cde extends Latte\Runtime\Template
 ';
 		$this->renderBlock('pluginjs', get_defined_vars()) /* line 46 */;
 		$this->renderBlock('pagejs', get_defined_vars()) /* line 50 */;
-		echo '    <script>
-        (function(document, window, $){
-            \'use strict\';
-
-            var Site = window.Site;
-            $(document).ready(function(){
-                Site.run();
-            });
-        })(document, window, jQuery);
-    </script>
-</body>
+		echo '</body>
 </html>';
 	}
 

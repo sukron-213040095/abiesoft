@@ -700,7 +700,7 @@ final class Template1172deb64a extends Latte\Runtime\Template
 		echo ';</script>
 <script src="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 604 */;
-		echo '/assets/jsa/produk/kategori.js"></script>
+		echo '/assets/jsa/kategori/list.js"></script>
 ';
 	}
 }

@@ -11,7 +11,7 @@ class kurir
     {
         $sql = 'CREATE TABLE kurir ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            nama VARCHAR(30) NOT NULL,
+            nama VARCHAR(255) NOT NULL,
             telp VARCHAR(13) NOT NULL,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 

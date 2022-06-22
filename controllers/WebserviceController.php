@@ -5,12 +5,11 @@ namespace App\Controllers;
 use AbieSoft\Auth\AuthController;
 use AbieSoft\Http\Controller;
 use AbieSoft\Mysql\DB;
-use AbieSoft\Utilities\Config;
 use AbieSoft\Utilities\Hash;
 use AbieSoft\Utilities\Input;
 use AbieSoft\Utilities\Metafile;
 use AbieSoft\Utilities\Tanggal;
-use Google\Service\CloudSearch\Id;
+use AbieSoft\Utilities\Format;
 
 class WebserviceController extends Controller
 {
@@ -244,10 +243,14 @@ class WebserviceController extends Controller
                 'delete' => ProdukController::delete($id),
                 'read' => ProdukController::read($id),
                 'search' => ProdukController::search($keyword),
+                'only' => ProdukController::only($id),
                 default => $this->error()
             };
         } else {
-            echo "Token Expire";
+            return match ($whatToDo) {
+                'only' => ProdukController::only($id),
+                default => $this->error()
+            };
         }
     }
 
@@ -259,11 +262,12 @@ class WebserviceController extends Controller
         foreach ($produk->hasil() as $p) {
             $items = new ProdukController();
             $items->id = $p->id;
-            $items->nama = $p->nama;
-            $items->slug = "";
+            $items->nama = Format::simpel($p->nama, 18);
+            $items->slug = $p->slug;
             $items->gambar = $p->gambar;
-            $items->keterangan = $p->keterangan;
+            $items->keterangan = Format::simpel($p->keterangan, 53);
             $items->harga = $p->harga;
+            $items->diskon = $p->diskon . "%";
             $list[] = $items;
         }
         echo json_encode($list);
@@ -277,10 +281,10 @@ class WebserviceController extends Controller
         foreach ($produk->hasil() as $p) {
             $items = new ProdukController();
             $items->id = $p->id;
-            $items->nama = $p->nama;
-            $items->slug = "";
+            $items->nama = Format::simpel($p->nama, 18);
+            $items->slug = $p->slug;
             $items->gambar = $p->gambar;
-            $items->keterangan = $p->keterangan;
+            $items->keterangan = Format::simpel($p->keterangan, 53);
             $items->harga = $p->harga;
             $items->diskon = $p->diskon . "%";
             $list[] = $items;
@@ -297,11 +301,12 @@ class WebserviceController extends Controller
         foreach ($produk->hasil() as $p) {
             $items = new ProdukController();
             $items->id = $p->id;
-            $items->nama = $p->nama;
-            $items->slug = "";
+            $items->nama = Format::simpel($p->nama, 20);
+            $items->slug = $p->slug;
             $items->gambar = $p->gambar;
-            $items->keterangan = $p->keterangan;
-            $items->harga = $p->harga;
+            $items->diskon = $p->diskon . "%";
+            $items->keterangan = Format::simpel($p->keterangan, 55);
+            $items->harga = Format::uang($p->harga);
             $list[] = $items;
         }
         echo json_encode($list);

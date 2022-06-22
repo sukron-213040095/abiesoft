@@ -12,7 +12,7 @@ class users
     {
         $sql = 'CREATE TABLE users ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            email VARCHAR(40) NOT NULL UNIQUE, 
+            email VARCHAR(255) NOT NULL UNIQUE, 
             password VARCHAR(64) NOT NULL, 
             salt VARCHAR(4) NOT NULL,
             nama VARCHAR(40) NOT NULL, 
@@ -22,7 +22,7 @@ class users
             cover TEXT DEFAULT NULL,
             nohp VARCHAR(13) DEFAULT NULL, 
             grupid INT(6) NOT NULL,
-            pertanyaan VARCHAR(100) NULL,
+            pertanyaan VARCHAR(255) NULL,
             jawaban VARCHAR(64) NULL,
             recovery VARCHAR(9) NULL UNIQUE,
             sessionid VARCHAR(64) NULL,

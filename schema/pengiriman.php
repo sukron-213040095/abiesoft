@@ -34,10 +34,11 @@ class pengiriman
 
     public static function buatdata()
     {
-        //DB::terhubung()->input('pengiriman', array(
-        // Input data disini 
-        //));  
-
+        /*
+            DB::terhubung()->input('pengiriman', array(
+                
+            ));
+        */
     }
 }
 

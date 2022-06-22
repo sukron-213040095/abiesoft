@@ -47,11 +47,8 @@ class KategoriController extends Controller
             $items->gambar = $p->gambar;
             $items->keterangan = $p->keterangan;
             $items->harga = $p->harga;
-            $items->stok = $p->stok;
-            $items->laku = $p->laku;
-            $items->dilihat = $p->dilihat;
-            $items->disukai = $p->disukai;
             $items->publik = $p->publik;
+            $items->slug = \AbieSoft\Utilities\Config::envReader('BASEURL') . "/produk/" . $p->slug;
             $list[] = $items;
         }
         echo json_encode($list);

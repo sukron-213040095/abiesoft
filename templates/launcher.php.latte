@@ -48,15 +48,5 @@
         Blok untuk include javascript per page
     *}
     {block pagejs}{/block}
-    <script>
-        (function(document, window, $){
-            'use strict';
-
-            var Site = window.Site;
-            $(document).ready(function(){
-                Site.run();
-            });
-        })(document, window, jQuery);
-    </script>
 </body>
 </html>
