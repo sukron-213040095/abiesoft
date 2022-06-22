@@ -178,3 +178,17 @@ if($('#dataTerbaru').length){
         document.getElementById('dataTerbaru').innerHTML = result;
     }
 }
+
+
+
+function loadCart(){
+    let loaccart = new Worker(BASEURL + '/assets/jsa/worker/worker-keranjang.js');
+    loaccart.postMessage([BASEURL,APIKEY]);
+    loaccart.onmessage = function(e) {
+        let data = e.data;
+        document.getElementById('jharga').innerHTML = data[0].total.toLocaleString();
+        document.getElementById('jitem').innerHTML = data[0].item;
+    }
+}
+
+loadCart();

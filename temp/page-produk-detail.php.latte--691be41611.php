@@ -28,8 +28,8 @@ final class Template691be41611 extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 9 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 56 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 57 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 61 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 62 */;
 	}
 
 
@@ -92,29 +92,36 @@ final class Template691be41611 extends Latte\Runtime\Template
         <div class="pl-8">
             <div class="p-4 bg-white rounded-md">
                 <div class="min-h-[80px]">
-                    <div class="relative h-[34px]">
-                        <form>
+                    <form method="post" action="" id="formKeranjang" name="formKeranjang" onSubmit="return setKeKeranjang()">
+                        <div class="relative h-[34px]">
                             <input type="number" onBlur="if(this.value == \'\'){ this.value = 1; hitungHarga(this.value); }" onKeyUp="hitungHarga(this.value)" class="absolute w-[150px] text-center border-[1px] border-solid border-slate-200 p-1 outline-none font-bold" value="1" id="qty" name="qty">
+                            <input type="hidden" id="idproduk" name="idproduk" value="';
+		echo LR\Filters::escapeHtmlAttr($id) /* line 28 */;
+		echo '">
                             <input type="hidden" id="iptstok" name="iptstok" value="0">
                             <input type="hidden" id="hargaitem" name="hargaitem" value="0">
                             <input type="hidden" id="hargaasli" name="hargaasli" value="0">
                             <button type=\'button\' class="absolute font-bold text-[14pt] mt-[3px] ml-[10px] hover:text-sky-400" onClick=\'minVal()\'><i class="las la-minus"></i></button>
                             <button type=\'button\' class="absolute font-bold text-[14pt] mt-[3px] ml-[125px] hover:text-sky-400" onClick=\'plusVal()\'><i class="las la-plus"></i></button>
-                            <div class="absolute right-0 mt-[5px]"><span class="ml-2">Stok </span><span class="font-semibold" id="stok">0</span></div>
-                        <form>
-                        <div class="w-full pt-[36px] text-red-600 text-[10pt]" id="msgErr"></div>
-                    </div>
-                    <div class="mt-4">
-                        <button type="button" class="font-semibold text-[10pt] text-sky-400"><i class="las la-pen"></i> Tambah Catatan</button>
-                    </div>
-                    <div id="transaksi" class="mt-4 mb-4"></div>
-                    <div class="relative pt-[20px]">
-                        <div id=\'totalHargaAsli\' class="absolute line-through right-0 mt-[-20px]">Rp. 0</div>
-                        <div class="flex justify-between items-center">
-                            <div>Subtotal</div>
-                            <div class="font-bold text-[18pt]">Rp. <span id="subtotal">0</span></div>
+                            <div class="absolute right-0 mt-[5px]"><span class="ml-2">Stok </span><span class="font-semibold px-2 py-1 text-white rounded-sm bg-sky-400" id="stok">0</span></div>
+                            <div class="w-full pt-[36px] text-red-600 text-[10pt]" id="msgErr"></div>
                         </div>
-                    </div>
+                        <div class="mt-4">
+                            <button type="button" class="font-semibold text-[10pt] text-sky-400"><i class="las la-pen"></i> Tambah Catatan</button>
+                        </div>
+                        <div id="transaksi" class="mt-4 mb-4"></div>
+                        <div class="relative pt-[20px]">
+                            <div id=\'totalHargaAsli\' class="absolute line-through right-0 mt-[-20px]">Rp. 0</div>
+                            <div class="flex justify-between items-center">
+                                <div>Subtotal</div>
+                                <div class="font-bold text-[18pt]">Rp. <span id="subtotal">0</span></div>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button class="bg-sky-400 text-white px-4 py-2 rounded-md hover:bg-[rgba(56,189,248,.8)]" type=\'submit\'><i class="las la-plus"></i> Keranjang</button>
+                            <button class="border-[2px] border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type=\'button\'>Beli</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -125,13 +132,13 @@ final class Template691be41611 extends Latte\Runtime\Template
 	}
 
 
-	/** {block pluginjs} on line 56 */
+	/** {block pluginjs} on line 61 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 57 */
+	/** {block pagejs} on line 62 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		extract($this->params);
@@ -140,14 +147,14 @@ final class Template691be41611 extends Latte\Runtime\Template
 
 		echo '<script>
 let SLUG = ';
-		echo LR\Filters::escapeJs($slug) /* line 59 */;
+		echo LR\Filters::escapeJs($slug) /* line 64 */;
 		echo ';
 let ID = ';
-		echo LR\Filters::escapeJs($id) /* line 60 */;
+		echo LR\Filters::escapeJs($id) /* line 65 */;
 		echo ';
 </script>
 <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 62 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 67 */;
 		echo '/assets/jsa/produk/detail.js"></script>
 ';
 	}

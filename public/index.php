@@ -8,6 +8,7 @@ use AbieSoft\Http\Lanjut;
 use AbieSoft\Utilities\Define;
 use App\Controllers\HomeController;
 use App\Controllers\KategoriController;
+use App\Controllers\KeranjangController;
 use App\Controllers\WebserviceController;
 
 require_once __DIR__ . "/../vendor/autoload.php";
@@ -39,10 +40,18 @@ Route::get('/kategori', function () {
 Route::get('/produk', function () {
     Lanjut::ke('/');
 });
+Route::get('/keranjang', function () {
+    Lanjut::ke('/order/checkout');
+});
+Route::get('/order', function () {
+    Lanjut::ke('/order/checkout');
+});
 Route::get('/kategori/{:nama}', [KategoriController::class, 'index']);
 Route::get('/produk/{:nama}', [ProdukController::class, 'detail']);
 Route::post('/produk/new', [ProdukController::class, 'new']);
 Route::post('/produk/update', [ProdukController::class, 'update']);
+Route::post('/keranjang/new', [KeranjangController::class, 'new']);
+Route::get('/keranjang{:apikey}', [KeranjangController::class, 'cart']);
 
 
 /*

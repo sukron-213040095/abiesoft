@@ -12,11 +12,11 @@ class invoice
         $sql = 'CREATE TABLE invoice ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
             no_invoice VARCHAR(13) NOT NULL UNIQUE,
-            transaksi TEXT NOT NULL,
-            total VARCHAR(6) NOT NULL,
+            transaksi TEXT DEFAULT NULL,
+            total VARCHAR(6) DEFAULT 0,
             status INT(6) DEFAULT 0, 
-            pembayaran_id INT(6) NOT NULL,
-            users_id INT(6) NOT NULL,
+            pembayaran_id INT(6) DEFAULT NULL,
+            users_id INT(6) DEFAULT NULL,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 
         )';

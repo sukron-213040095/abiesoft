@@ -84,8 +84,12 @@ function loadDataProduk(ID){
             document.getElementById('hargaasli').value = data[0].harga;
             document.getElementById('totalHargaAsli').innerHTML = "Rp. "+data[0].harga.toLocaleString();
         }else{
-            document.getElementById('hargaasli').value = "";
+            document.getElementById('hargaasli').value = 0;
             document.getElementById('totalHargaAsli').innerHTML = "";
+        }
+        let onlinestatus = `<div class="px-4 text-white bg-red-600 rounded-md">offline</div>`;
+        if(data[0].status == "online"){
+            onlinestatus = `<div class="px-4 text-white bg-green-400 rounded-md">online</div>`;
         }
         document.getElementById('boxDetailInfo').innerHTML = `
             <div class="grid grid-cols-2 gap-2 mb-8">
@@ -122,7 +126,7 @@ function loadDataProduk(ID){
                         </div>
                         <div class="text-[10pt] pl-4">
                             <div class="font-semibold">`+data[0].namauser+`</div>
-                            <div>online</div>
+                            `+onlinestatus+`
                         </div>
                     </div>
                 </div>
@@ -146,8 +150,12 @@ function minVal(){
         document.querySelector("input[type='number']").value = result;
         jsubtotal = result * parseInt(hargaitem);
         document.getElementById('subtotal').innerHTML = jsubtotal.toLocaleString();
-        jhargaasli = result * parseInt(hargaasli);
-        document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        if(hargaasli !=0){
+            jhargaasli = result * parseInt(hargaasli);
+            document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        }else{
+            document.getElementById('totalHargaAsli').innerHTML = "";
+        }
     }
 }
 
@@ -163,8 +171,12 @@ function plusVal(){
         document.querySelector("input[type='number']").value = result;
         jsubtotal = result * parseInt(hargaitem);
         document.getElementById('subtotal').innerHTML = jsubtotal.toLocaleString();
-        jhargaasli = result * parseInt(hargaasli);
-        document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        if(hargaasli !=0){
+            jhargaasli = result * parseInt(hargaasli);
+            document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        }else{
+            document.getElementById('totalHargaAsli').innerHTML = "";
+        }
     }
 }
 
@@ -180,21 +192,54 @@ function hitungHarga(item){
         document.getElementById('qty').value = 1;
         jsubtotal = 1 * parseInt(hargaitem);
         document.getElementById('subtotal').innerHTML = jsubtotal.toLocaleString();
-        jhargaasli = 1 * parseInt(hargaasli);
-        document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        if(hargaasli !=0){
+            jhargaasli = 1 * parseInt(hargaasli);
+            document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        }else{
+            document.getElementById('totalHargaAsli').innerHTML = "";
+        }
     }else if(parseInt(item) > parseInt(stok)){
         $('#msgErr').html("Max. Pembelian tergantung stok, sisa stok "+ stok + " pcs");
         document.getElementById('qty').value = stok;
         jsubtotal = stok * parseInt(hargaitem);
         document.getElementById('subtotal').innerHTML = jsubtotal.toLocaleString();
-        jhargaasli = stok * parseInt(hargaasli);
-        document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        if(hargaasli !=0){
+            jhargaasli = stok * parseInt(hargaasli);
+            document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        }else{
+            document.getElementById('totalHargaAsli').innerHTML = "";
+        }
     }else{
         $('#msgErr').html("");
         document.getElementById('qty').value = item;
         jsubtotal = qty * parseInt(hargaitem);
         document.getElementById('subtotal').innerHTML = jsubtotal.toLocaleString();
-        jhargaasli = qty * parseInt(hargaasli);
-        document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        if(hargaasli !=0){
+            jhargaasli = qty * parseInt(hargaasli);
+            document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
+        }else{
+            document.getElementById('totalHargaAsli').innerHTML = "";
+        }
     }
+}
+
+function setKeKeranjang(){
+    const form = document.querySelector('form[id="formKeranjang"]');
+    const formData = new FormData(form);
+    fetch(BASEURL + '/keranjang/new', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data[0].message == "Cancel"){
+            toastr.error("Gagal menambah item");
+            loadCart();
+        }else{
+            toastr.success(data[0].message);
+            loadCart();
+        }
+    })
+    .catch(error => console.error(error));
+    return false;
 }

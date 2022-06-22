@@ -471,7 +471,7 @@ class AuthController extends Controller
                     if ($sessionid === $user->sessionid) {
                         /*if ($user->pertanyaan != null) {*/
                         DB::terhubung()->perbarui('users', $user->id, array(
-                            'sessionid' => null,
+                            'sessionid' => NULL,
                             'diupdate' => date('Y-m-d H:i:s')
                         ));
                         if ($lockscreen != "on") {
@@ -488,7 +488,7 @@ class AuthController extends Controller
                         }*/
                     } else {
                         DB::terhubung()->perbarui('users', $user->id, array(
-                            'sessionid' => null,
+                            'sessionid' => NULL,
                             'diupdate' => date('Y-m-d H:i:s')
                         ));
                         Cookies::hapus('ABIESOFT-SCT');

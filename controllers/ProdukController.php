@@ -121,7 +121,7 @@ class ProdukController extends Controller
 
     public static function tab()
     {
-        $produk = DB::terhubung()->query("SELECT * FROM produk ORDER BY id DESC");
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE users_id = '" . \AbieSoft\Auth\AuthController::getID() . "' ORDER BY id DESC");
         $list = [];
         foreach ($produk->hasil() as $p) {
             if ($p->diskon == null) {
@@ -152,7 +152,7 @@ class ProdukController extends Controller
 
     public static function read($id)
     {
-        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE id = '" . $id . "' ");
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE id = '" . $id . "' AND users_id = '" . \AbieSoft\Auth\AuthController::getID() . "' ");
         $list = [];
         foreach ($produk->hasil() as $p) {
             if ($p->diskon == null) {
@@ -198,7 +198,8 @@ class ProdukController extends Controller
             }
             $puser = "";
             $nuser = "";
-            $user = DB::terhubung()->query("SELECT id,nama,photo FROM users WHERE id = '" . $p->users_id . "' ");
+            $sessionid = "offline";
+            $user = DB::terhubung()->query("SELECT id,nama,photo,sessionid FROM users WHERE id = '" . $p->users_id . "' ");
             if ($user->hitung()) {
                 foreach ($user->hasil() as $u) {
                     $filephoto = __DIR__ . "/../public";
@@ -212,6 +213,12 @@ class ProdukController extends Controller
                         }
                     } else {
                         $pp = \AbieSoft\Utilities\Config::envReader('BASEURL') . "/assets/media/photo/default.png";
+                    }
+
+                    if ($u->sessionid != NULL) {
+                        $sessionid = "online";
+                    } else {
+                        $sessionid = "offline";
                     }
 
                     $puser = $pp;
@@ -233,6 +240,7 @@ class ProdukController extends Controller
             $items->diskon = $diskon;
             $items->photouser = $puser;
             $items->namauser = $nuser;
+            $items->status = $sessionid;
             $list[] = $items;
         }
         echo json_encode($list);
@@ -240,7 +248,7 @@ class ProdukController extends Controller
 
     public static function search($keyword)
     {
-        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE nama LIKE '%" . $keyword . "%' ");
+        $produk = DB::terhubung()->query("SELECT * FROM produk WHERE nama LIKE '%" . $keyword . "%' AND users_id = '" . \AbieSoft\Auth\AuthController::getID() . "' ");
         $list = [];
         foreach ($produk->hasil() as $p) {
             if ($p->diskon == null) {
