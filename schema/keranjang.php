@@ -15,6 +15,7 @@ class keranjang
             produk_id INT(6) NOT NULL,
             jumlah INT(6) NOT NULL,
             total INT(11) NOT NULL,
+            catatan TEXT DEFAULT NULL,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 
         )';

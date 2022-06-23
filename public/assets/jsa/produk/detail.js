@@ -133,6 +133,7 @@ function loadDataProduk(ID){
             </div>
         `;
         showTabDetail();
+        cekItem(ID);
     }
     return false;
 }
@@ -187,6 +188,7 @@ function hitungHarga(item){
     let hargaasli = document.querySelector("input[id='hargaasli']").value;
     let jsubtotal = hargaitem;
     let jhargaasli = hargaasli;
+
     if(parseInt(item) <= 0 ){
         $('#msgErr').html("Minimal pembelian 1 pcs");
         document.getElementById('qty').value = 1;
@@ -212,10 +214,11 @@ function hitungHarga(item){
     }else{
         $('#msgErr').html("");
         document.getElementById('qty').value = item;
-        jsubtotal = qty * parseInt(hargaitem);
+        console.log(parseInt(hargaitem));
+        jsubtotal = item * parseInt(hargaitem);
         document.getElementById('subtotal').innerHTML = jsubtotal.toLocaleString();
         if(hargaasli !=0){
-            jhargaasli = qty * parseInt(hargaasli);
+            jhargaasli = item * parseInt(hargaasli);
             document.getElementById('totalHargaAsli').innerHTML = "Rp. "+jhargaasli.toLocaleString();
         }else{
             document.getElementById('totalHargaAsli').innerHTML = "";
@@ -234,12 +237,87 @@ function setKeKeranjang(){
     .then(data => {
         if(data[0].message == "Cancel"){
             toastr.error("Gagal menambah item");
+            cekItem(ID);
             loadCart();
         }else{
             toastr.success(data[0].message);
+            cekItem(ID);
             loadCart();
         }
     })
     .catch(error => console.error(error));
     return false;
 }
+
+function tambahCatatan(){
+    let catatan = document.querySelector('#boxCatatan');
+    if(catatan.className == "hidden"){
+        catatan.setAttribute("class","block");
+    }else{
+        catatan.setAttribute("class","hidden");
+    }
+}
+
+function loginNext(NEXT){
+    window.location.href = BASEURL + "/login?next="+NEXT;
+}
+
+function hapusItem(){
+    fetch(BASEURL + '/webservice/produk?apikey='+ APIKEY +'&id='+ID+'&do=hapusitem', {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data[0].message == "Berhasil"){
+            toastr.error("Item dihapus");
+            cekItem(ID);
+            loadCart();
+            hitungHarga(1);
+        }
+    })
+    .catch(error => console.error(error));
+    return false;
+}
+
+function cekItem(ID){
+    let item = new Worker(BASEURL + '/assets/jsa/worker/CrudProduk/worker-item.js');
+    item.postMessage([BASEURL,APIKEY,ID]);
+    item.onmessage = function(e) {
+        let data = e.data;
+        console.log(data[0]);
+        if(data[0].jumlah != undefined){
+            document.getElementById('transaksi').innerHTML = `
+                <div class="bg-slate-50 p-2 text-[11pt] relative">
+                    <button onClick='hapusItem()' type='button' class="text-[10pt] font-bold absolute right-[5px] top=[-3px] hover:text-sky-400"><i class="las la-times"></i></button>
+                    <div class=" grid grid-cols-3 gap-2">
+                        <div class="col-span-2">
+                            <div>`+data[0].jumlah+`x</div>
+                            <div class='font-semibold'>`+data[0].nama+`</div>
+                        </div>
+                        <div class='text-right font-semibold'>
+                            <div>&nbsp;</div>
+                            <div>Rp. `+data[0].total.toLocaleString()+`</div>
+                        </div>
+                    </div>
+                    <div class='text-[10pt]'>`+data[0].catatan+`</div>
+                </div>
+            `;
+            document.getElementById('btnKeranjang').innerHTML = "Perbarui";
+        }else{
+            document.getElementById('transaksi').innerHTML = "";
+            document.getElementById('btnKeranjang').innerHTML = `<i class="las la-plus"></i> Keranjang`;
+        }
+        document.getElementById('catatan').value = data[0].catatan;
+        if(data[0].harga != 0){
+            document.getElementById('totalHargaAsli').innerHTML = data[0].harga.toLocaleString();
+        }else{
+            document.getElementById('totalHargaAsli').innerHTML = "";
+        }
+        document.getElementById('subtotal').innerHTML = data[0].total.toLocaleString();
+        document.getElementById('qty').value = data[0].jumlah;
+    }
+    return false;
+}
+
+cekItem(ID);
+

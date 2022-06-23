@@ -405,4 +405,74 @@ class ProdukController extends Controller
             echo json_encode($result);
         }
     }
+
+    public static function item($id)
+    {
+        $uid = \AbieSoft\Auth\AuthController::getID();
+        $data = [
+            [
+                'total' => null,
+                'jumlah' => null,
+                'harga' => null,
+                'catatan' => null,
+                'nama' => null,
+            ]
+        ];
+        $cekitem = DB::terhubung()->query("SELECT 
+                keranjang.total,
+                keranjang.jumlah,
+                keranjang.catatan,
+                produk.harga,
+                produk.nama,
+                produk.diskon
+             FROM 
+                keranjang, 
+                invoice, 
+                produk
+            WHERE 
+                invoice.id = keranjang.invoice_id
+                AND invoice.users_id = '{$uid}'
+                AND produk.id = keranjang.produk_id
+                AND produk.id = {$id}
+            ");
+        if ($cekitem->hitung()) {
+            foreach ($cekitem->hasil() as $ci) {
+                if ($ci->diskon != 0) {
+                    $harga = $ci->harga * $ci->jumlah;
+                } else {
+                    $harga = 0;
+                }
+
+                $data = [
+                    [
+                        'total' => $ci->total,
+                        'jumlah' => $ci->jumlah,
+                        'harga' => $harga,
+                        'catatan' => $ci->catatan,
+                        'nama' => $ci->nama,
+                    ]
+                ];
+            }
+        }
+        echo json_encode($data);
+    }
+
+    public static function hapusitem($id)
+    {
+        $hapus = DB::terhubung()->hapus('keranjang', array('produk_id', '=', $id));
+        if ($hapus) {
+            $data = [
+                [
+                    'message' => 'Berhasil'
+                ]
+            ];
+        } else {
+            $data = [
+                [
+                    'message' => 'Gagal'
+                ]
+            ];
+        }
+        echo json_encode($data);
+    }
 }

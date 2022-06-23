@@ -32,8 +32,8 @@ final class Templatec22b41564d extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 11 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 63 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 64 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 64 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 65 */;
 	}
 
 
@@ -126,10 +126,13 @@ final class Templatec22b41564d extends Latte\Runtime\Template
                                 <input type="password" id="password" name="password" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Password">
                             </div>
                             <div class="mb-4">
+                                <input type=\'hidden\' id=\'next\' name=\'next\' value=\'';
+		echo LR\Filters::escapeHtmlAttr(\AbieSoft\Utilities\Input::get('next')) /* line 50 */;
+		echo '\'>
                                 ';
-		echo LR\Filters::escapeHtmlText(\AbieSoft\Utilities\Generate::token()) /* line 50 */;
+		echo LR\Filters::escapeHtmlText(\AbieSoft\Utilities\Generate::token()) /* line 51 */;
 		echo '<input type="hidden" id="__token" name="__token" value="';
-		echo LR\Filters::escapeHtmlAttr(\AbieSoft\Magic\Reader::token()) /* line 50 */;
+		echo LR\Filters::escapeHtmlAttr(\AbieSoft\Magic\Reader::token()) /* line 51 */;
 		echo '">
                                 <button type="submit"  id="btnLogin" name="btnLogin" class="mt-2 radius-lg px-4 py-2 border bg-sky-900 hover:bg-sky-800 text-white font-semibold w-full outline-none">Login</button>
                             </div>
@@ -141,23 +144,23 @@ final class Templatec22b41564d extends Latte\Runtime\Template
     </div>
 
     <div class="text-center mt-[50px] mb-[25px] text-[11pt] font-semibold">&copy; ';
-		echo LR\Filters::escapeHtmlText(date('Y')) /* line 60 */;
+		echo LR\Filters::escapeHtmlText(date('Y')) /* line 61 */;
 		echo ' | <span>Umieali Cake & Cookies</span></div>
 ';
 	}
 
 
-	/** {block pluginjs} on line 63 */
+	/** {block pluginjs} on line 64 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 64 */
+	/** {block pagejs} on line 65 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		echo '    <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 65 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 66 */;
 		echo '/assets/jsa/login.js"></script>
 ';
 	}

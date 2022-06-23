@@ -5,11 +5,14 @@ namespace App\Controllers;
 use AbieSoft\Auth\AuthController;
 use AbieSoft\Http\Controller;
 use AbieSoft\Mysql\DB;
+use AbieSoft\Utilities\Config;
+use AbieSoft\Utilities\Cookies;
 use AbieSoft\Utilities\Hash;
 use AbieSoft\Utilities\Input;
 use AbieSoft\Utilities\Metafile;
 use AbieSoft\Utilities\Tanggal;
 use AbieSoft\Utilities\Format;
+use Firebase\JWT\JWT;
 
 class WebserviceController extends Controller
 {
@@ -244,6 +247,8 @@ class WebserviceController extends Controller
                 'read' => ProdukController::read($id),
                 'search' => ProdukController::search($keyword),
                 'only' => ProdukController::only($id),
+                'item' => ProdukController::item($id),
+                'hapusitem' => ProdukController::hapusitem($id),
                 default => $this->error()
             };
         } else {

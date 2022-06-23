@@ -26,11 +26,10 @@ final class Templatef705163134 extends Latte\Runtime\Template
 		extract($ʟ_args);
 		unset($ʟ_args);
 
-		if (\AbieSoft\Utilities\GetUri::currentPage() != 'login' && \AbieSoft\Utilities\GetUri::currentPage() != 'registrasi' && \AbieSoft\Utilities\GetUri::currentPage() != 'syaratketentuan') /* line 2 */ {
+		if (\AbieSoft\Utilities\GetUri::currentPage() != 'login' && \AbieSoft\Utilities\GetUri::currentPage() != 'registrasi' && \AbieSoft\Utilities\GetUri::currentPage() != 'syaratketentuan' && \AbieSoft\Utilities\GetUri::currentPage() != 'login?next=http:') /* line 2 */ {
 			echo '<div class="h-[80px]"></div>
 <div class="fixed top-0 left-0 right-0 z-[999]">
     <div class="bg-white p-4 shadow-sm">
-        
         <div class="flex justify-center">
             <div class="">
                 <div class="lg:w-[1100px] xl:w-[1100px] md:lg:w-full sm:w-full w-full flex justify-between items-center">

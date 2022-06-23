@@ -25,6 +25,7 @@ $app = new AbieSoftAppSystem;
 use App\Controllers\OrderController;
 use App\Controllers\ProdukController;
 use App\Controllers\ProfileController;
+use App\Controllers\TestController;
 
 /*  
     Simpan setingan kamu disini 
@@ -72,4 +73,6 @@ Route::post('/webservice/profile/upload', [WebserviceController::class, 'upload'
 Route::get('/webservice/formater{:tgl}', [WebserviceController::class, 'formater']);
 Route::get('/webservice/produk{:apikey}{:id}{:do}', [WebserviceController::class, 'doProduk']);
 Route::get('/webservice/produk{:apikey}{:keyword}{:do}', [WebserviceController::class, 'doProduk']);
+Route::get('/webservice/user{:apikey}{:do}', [WebserviceController::class, 'doLogin']);
+Route::get('/testscript', [TestController::class, 'testscript']);
 $app->start();

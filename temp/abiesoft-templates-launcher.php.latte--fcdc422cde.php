@@ -101,13 +101,13 @@ final class Templatefcdc422cde extends Latte\Runtime\Template
     <script src="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 44 */;
 		echo '/assets/js/validasi.js"></script>
-    <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 45 */;
-		echo '/assets/jsa/index.js"></script>
 ';
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 46 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 50 */;
-		echo '</body>
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 45 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 49 */;
+		echo '    <script src="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 50 */;
+		echo '/assets/jsa/index.js"></script>
+</body>
 </html>';
 	}
 
@@ -142,13 +142,13 @@ final class Templatefcdc422cde extends Latte\Runtime\Template
 	}
 
 
-	/** {block pluginjs} on line 46 */
+	/** {block pluginjs} on line 45 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 50 */
+	/** {block pagejs} on line 49 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 	}

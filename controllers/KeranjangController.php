@@ -15,6 +15,7 @@ class KeranjangController extends Controller
     {
         $idproduk = Input::get('idproduk');
         $hargaitem = Input::get('hargaitem');
+        $catatan = Input::get('catatan');
 
         $cekdiskon = DB::terhubung()->query("SELECT id,diskon FROM produk WHERE id = '" . $idproduk . "' AND diskon = 0  ");
         if ($cekdiskon->hitung()) {
@@ -56,7 +57,8 @@ class KeranjangController extends Controller
                     'invoice_id' => $invoiceid,
                     'produk_id' => $idproduk,
                     'jumlah' => $qty,
-                    'total' => $total
+                    'total' => $total,
+                    'catatan' => $catatan
                 ));
                 if ($inputkeranjang) {
                     $data = [
@@ -97,7 +99,8 @@ class KeranjangController extends Controller
                 $perbarui = DB::terhubung()->perbarui('keranjang', $idkeranjang, array(
                     'produk_id' => $idproduk,
                     'jumlah' => $qty,
-                    'total' => $total
+                    'total' => $total,
+                    'catatan' => $catatan
                 ));
 
                 if ($perbarui) {
@@ -120,7 +123,8 @@ class KeranjangController extends Controller
                     'invoice_id' => $invoiceid,
                     'produk_id' => $idproduk,
                     'jumlah' => $qty,
-                    'total' => $total
+                    'total' => $total,
+                    'catatan' => $catatan
                 ));
                 if ($inputkeranjang) {
                     $data = [
@@ -143,43 +147,23 @@ class KeranjangController extends Controller
 
     public static function cart()
     {
-        $selectinvoice = DB::terhubung()->query("SELECT id, users_id FROM invoice WHERE users_id ='" . \AbieSoft\Auth\AuthController::getID() . "' ");
-        if ($selectinvoice->hitung()) {
-            foreach ($selectinvoice->hasil() as $i) {
-                $idinvoice = $i->id;
-                $cekitiem = DB::terhubung()->query("SELECT * FROM keranjang WHERE invoice_id = '" . $idinvoice . "' ");
-                if ($cekitiem->hitung()) {
-                    $harga = [];
-                    $item = [];
-                    foreach ($cekitiem->hasil() as $h) {
-                        $harga[] = $h->total;
-                        $item[] = $h->jumlah;
-                    }
+        $uid  = \AbieSoft\Auth\AuthController::getID();
+        $selectData = DB::terhubung()->query("
+            SELECT 
+                SUM(keranjang.total) as total,
+                SUM(keranjang.jumlah) as jumlah
+            FROM
+                invoice,
+                keranjang,
+                produk
+            WHERE
+                keranjang.invoice_id = invoice.id
+                AND keranjang.produk_id = produk.id
+                AND invoice.users_id = '" . $uid . "'
+        ");
 
-                    $data = [
-                        [
-                            'message' => 'Cancel',
-                            'total' => array_sum($harga),
-                            'item' => array_sum($item)
-                        ]
-                    ];
-                    echo json_encode($data);
-                } else {
-                    $data = [
-                        [
-                            'message' => 'Cancel'
-                        ]
-                    ];
-                    echo json_encode($data);
-                }
-            }
-        } else {
-            $data = [
-                [
-                    'message' => 'Cancel'
-                ]
-            ];
-            echo json_encode($data);
+        if ($selectData->hitung()) {
+            echo json_encode($selectData->hasil());
         }
     }
 }

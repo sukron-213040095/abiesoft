@@ -195,7 +195,11 @@ class AuthController extends Controller
                         ];
                         $jwt = JWT::encode($payload, Config::envReader('WEB_TOKEN'), 'HS256');
                         Cookies::simpan('ABIESOFT-SCT', $jwt);
-                        echo "Berhasil";
+                        if (Input::get('next')) {
+                            echo Input::get('next');
+                        } else {
+                            echo "Berhasil";
+                        }
                     } else {
                         if ($user->pertanyaan != null) {
                             $sha1date = sha1(date('YmdHis'));
@@ -216,7 +220,7 @@ class AuthController extends Controller
                         }
                     }
                 } else {
-                    echo "Token Expire";
+                    echo "Cancel";
                 }
             } else {
                 echo "Cancel";

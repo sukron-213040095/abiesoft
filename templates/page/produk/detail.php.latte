@@ -35,7 +35,8 @@
                             <div class="w-full pt-[36px] text-red-600 text-[10pt]" id="msgErr"></div>
                         </div>
                         <div class="mt-4">
-                            <button type="button" class="font-semibold text-[10pt] text-sky-400"><i class="las la-pen"></i> Tambah Catatan</button>
+                            <button type="button" class="font-semibold text-[10pt] text-sky-400" onClick="tambahCatatan()"><i class="las la-pen"></i> Tambah Catatan</button>
+                            <div id='boxCatatan' class="hidden"><input type='text' id="catatan" name="catatan" class="px-2 py-2 w-full rounded-md border-[2px] border-solid border-gray-300 outline-none" placeholder="Catatan pembelian"></div>
                         </div>
                         <div id="transaksi" class="mt-4 mb-4"></div>
                         <div class="relative pt-[20px]">
@@ -45,10 +46,16 @@
                                 <div class="font-bold text-[18pt]">Rp. <span id="subtotal">0</span></div>
                             </div>
                         </div>
-                        <div class="mt-4 grid grid-cols-2 gap-2">
-                            <button class="bg-sky-400 text-white px-4 py-2 rounded-md hover:bg-[rgba(56,189,248,.8)]" type='submit'><i class="las la-plus"></i> Keranjang</button>
-                            <button class="border-[2px] border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type='button'>Beli</button>
-                        </div>
+                         {if \AbieSoft\Auth\AuthController::isLogin()}
+                            <div class="mt-4 grid grid-cols-2 gap-2">
+                                <button class="bg-sky-400 text-white px-4 py-2 rounded-md hover:bg-[rgba(56,189,248,.8)]" type='submit' id='btnKeranjang'><i class="las la-plus"></i> Keranjang</button>
+                                <button class="border-[2px] border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type='button'>Beli</button>
+                            </div>
+                        {else}
+                            <div class="mt-4 grid grid-cols-1 gap-2">
+                                <button class="border-[2px] w-full border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type='button' onClick="loginNext(window.location.href)">Login</button>
+                            </div>
+                        {/if}
                     </form>
                 </div>
             </div>

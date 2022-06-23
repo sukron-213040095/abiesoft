@@ -25,6 +25,7 @@ class Route extends Request
     public static function sistem($class)
     {
         Route::get('/login', [$class, 'login']);
+        Route::get('/login{:next}', [$class, 'login']);
         Route::get('/wellcome', [$class, 'wellcome']);
         Route::get('/syaratketentuan', [$class, 'syaratketentuan']);
         Route::get('/logout', [$class, 'logout']);

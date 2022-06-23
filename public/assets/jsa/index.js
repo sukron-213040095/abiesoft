@@ -186,8 +186,13 @@ function loadCart(){
     loaccart.postMessage([BASEURL,APIKEY]);
     loaccart.onmessage = function(e) {
         let data = e.data;
-        document.getElementById('jharga').innerHTML = data[0].total.toLocaleString();
-        document.getElementById('jitem').innerHTML = data[0].item;
+        if(data[0].total !== null && data[0].jumlah !== null){
+            document.querySelector('#jharga').innerHTML = data[0].total.toLocaleString();
+            document.querySelector('#jitem').innerHTML = data[0].jumlah;
+        }else{
+            document.querySelector('#jharga').innerHTML = 0;
+            document.querySelector('#jitem').innerHTML = 0;
+        }
     }
 }
 

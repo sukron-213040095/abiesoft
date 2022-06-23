@@ -23,10 +23,12 @@ $("form#formLogin").on("submit", function(e) {
             success: function(msg) {
                 if (msg == "Berhasil") {
                     window.location.href = BASEURL;
-                } else {
+                } else if (msg == "Cancel") {
                     toastr.error("Login gagal");
                     btnLogin.removeAttribute("disabled");
                     btnLogin.innerHTML = `Login`;
+                } else {
+                    window.location.href = msg;
                 }
             },
             cache: false,

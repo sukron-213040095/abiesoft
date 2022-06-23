@@ -28,8 +28,8 @@ final class Template691be41611 extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 9 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 61 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 62 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 68 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 69 */;
 	}
 
 
@@ -107,7 +107,8 @@ final class Template691be41611 extends Latte\Runtime\Template
                             <div class="w-full pt-[36px] text-red-600 text-[10pt]" id="msgErr"></div>
                         </div>
                         <div class="mt-4">
-                            <button type="button" class="font-semibold text-[10pt] text-sky-400"><i class="las la-pen"></i> Tambah Catatan</button>
+                            <button type="button" class="font-semibold text-[10pt] text-sky-400" onClick="tambahCatatan()"><i class="las la-pen"></i> Tambah Catatan</button>
+                            <div id=\'boxCatatan\' class="hidden"><input type=\'text\' id="catatan" name="catatan" class="px-2 py-2 w-full rounded-md border-[2px] border-solid border-gray-300 outline-none" placeholder="Catatan pembelian"></div>
                         </div>
                         <div id="transaksi" class="mt-4 mb-4"></div>
                         <div class="relative pt-[20px]">
@@ -117,11 +118,20 @@ final class Template691be41611 extends Latte\Runtime\Template
                                 <div class="font-bold text-[18pt]">Rp. <span id="subtotal">0</span></div>
                             </div>
                         </div>
-                        <div class="mt-4 grid grid-cols-2 gap-2">
-                            <button class="bg-sky-400 text-white px-4 py-2 rounded-md hover:bg-[rgba(56,189,248,.8)]" type=\'submit\'><i class="las la-plus"></i> Keranjang</button>
-                            <button class="border-[2px] border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type=\'button\'>Beli</button>
-                        </div>
-                    </form>
+';
+		if (\AbieSoft\Auth\AuthController::isLogin()) /* line 49 */ {
+			echo '                            <div class="mt-4 grid grid-cols-2 gap-2">
+                                <button class="bg-sky-400 text-white px-4 py-2 rounded-md hover:bg-[rgba(56,189,248,.8)]" type=\'submit\' id=\'btnKeranjang\'><i class="las la-plus"></i> Keranjang</button>
+                                <button class="border-[2px] border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type=\'button\'>Beli</button>
+                            </div>
+';
+		} else /* line 54 */ {
+			echo '                            <div class="mt-4 grid grid-cols-1 gap-2">
+                                <button class="border-[2px] w-full border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type=\'button\' onClick="loginNext(window.location.href)">Login</button>
+                            </div>
+';
+		}
+		echo '                    </form>
                 </div>
             </div>
         </div>
@@ -132,13 +142,13 @@ final class Template691be41611 extends Latte\Runtime\Template
 	}
 
 
-	/** {block pluginjs} on line 61 */
+	/** {block pluginjs} on line 68 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 62 */
+	/** {block pagejs} on line 69 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		extract($this->params);
@@ -147,14 +157,14 @@ final class Template691be41611 extends Latte\Runtime\Template
 
 		echo '<script>
 let SLUG = ';
-		echo LR\Filters::escapeJs($slug) /* line 64 */;
+		echo LR\Filters::escapeJs($slug) /* line 71 */;
 		echo ';
 let ID = ';
-		echo LR\Filters::escapeJs($id) /* line 65 */;
+		echo LR\Filters::escapeJs($id) /* line 72 */;
 		echo ';
 </script>
 <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 67 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 74 */;
 		echo '/assets/jsa/produk/detail.js"></script>
 ';
 	}
