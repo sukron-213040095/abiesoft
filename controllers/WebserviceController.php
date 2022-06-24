@@ -249,6 +249,7 @@ class WebserviceController extends Controller
                 'only' => ProdukController::only($id),
                 'item' => ProdukController::item($id),
                 'hapusitem' => ProdukController::hapusitem($id),
+                'suka' => ProdukController::suka($id),
                 default => $this->error()
             };
         } else {

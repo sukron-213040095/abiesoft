@@ -475,4 +475,35 @@ class ProdukController extends Controller
         }
         echo json_encode($data);
     }
+
+    public static function suka($id)
+    {
+        preg_match_all('/\d+/', $id, $matches);
+        $idjadi = $matches[0][0];
+        $uid = AuthController::getID();
+        $cek = DB::terhubung()->query("SELECT produk_id, users_id FROM suka WHERE produk_id ='" . $idjadi . "' AND users_id ='" . $uid . "' ");
+        if ($cek->hitung()) {
+            DB::terhubung()->query("
+                DELETE FROM suka WHERE
+                produk_id ='" . $idjadi . "'
+                AND users_id = '" . $uid . "'
+            ");
+            $data = [
+                [
+                    'message' => 'Dibatalkan'
+                ]
+            ];
+        } else {
+            DB::terhubung()->input('suka', array(
+                'produk_id' => $idjadi,
+                'users_id' => $uid
+            ));
+            $data = [
+                [
+                    'message' => 'Disukai'
+                ]
+            ];
+        }
+        echo json_encode($data);
+    }
 }

@@ -87,9 +87,9 @@ function loadDataProduk(ID){
             document.getElementById('hargaasli').value = 0;
             document.getElementById('totalHargaAsli').innerHTML = "";
         }
-        let onlinestatus = `<div class="px-4 text-white bg-red-600 rounded-md">offline</div>`;
+        let onlinestatus = `<div class="relative h-[20px]"><div class="absolute  px-4 text-white bg-red-600 rounded-md">offline</div></div>`;
         if(data[0].status == "online"){
-            onlinestatus = `<div class="px-4 text-white bg-green-400 rounded-md">online</div>`;
+            onlinestatus = `<div class="relative h-[20px]"><div class="absolute px-4 text-white bg-green-400 rounded-md">online</div></div>`;
         }
         document.getElementById('boxDetailInfo').innerHTML = `
             <div class="grid grid-cols-2 gap-2 mb-8">
@@ -107,7 +107,7 @@ function loadDataProduk(ID){
                         </div>
                         <div class="pr-2 font-semibold">.</div>
                         <div class="pr-2 py-1 rounded-[25px] flex justify-center items-center">
-                            <span>Suka</span>
+                            <button class="hover:text-sky-400" onClick='likeThis(this.id)' id="sukaterbaru`+data[0].id+`"><i class="las la-heart"></i></button>
                             <span class='text-[10pt] ml-[5px] font-semibold'>`+data[0].suka+`</span>
                         </div>
                     </div>
@@ -320,4 +320,18 @@ function cekItem(ID){
 }
 
 cekItem(ID);
+
+
+function likeThis(id){
+    let suka = new Worker(BASEURL + '/assets/jsa/worker/worker-suka.js');
+    suka.postMessage([BASEURL,APIKEY,id]);
+    suka.onmessage = function(e) {
+        let data = e.data;
+        if(data[0].message == "Disukai"){
+            document.getElementById(id).setAttribute('class','absolute text-red-500 font-bold text-[14pt] right-[5px] top-[0px]');
+        }else{
+            document.getElementById(id).setAttribute('class','absolute text-gray-500 font-bold text-[14pt] right-[5px] top-[0px]');
+        }
+    }
+}
 

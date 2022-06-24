@@ -28,10 +28,10 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 9 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 790 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 791 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 792 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 793 */;
 		echo "\n";
-		$this->renderBlock('footer', get_defined_vars()) /* line 795 */;
+		$this->renderBlock('footer', get_defined_vars()) /* line 797 */;
 	}
 
 
@@ -66,7 +66,7 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
 	/** {block body} on line 7 */
 	public function blockBody(array $ʟ_args): void
 	{
-		echo 'bg-slate-200';
+		echo 'bg-slate-100';
 	}
 
 
@@ -89,53 +89,50 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 15 */;
 		echo '/assets/media/images/img_3.png" class="w-[100%] block"></div>
         </div>
-        <div class="text-center">
-            <div class="text-[20pt] font-semibold">Rayakan pesta bersama yang spesial dari kreasi kami</div>
-            <div class="text-[20pt] font-semibold">Umieali cake and cookies</div>
-        </div>
+        
 
-        <div class="category mt-8 mb-8">
+        <div class="category mt-4 mb-8">
             <div class="grid grid-cols-7 gap-4">
                 <a href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 26 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 23 */;
 		echo '/kategori/aneka-bolu" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
                     Aneka Bolu
                 </a>
                 <a href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 29 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 26 */;
 		echo '/kategori/kue-pengantin" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
                     Kue Pengantin
                 </a>
                 <a href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 32 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 29 */;
 		echo '/kategori/kue-khitan" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
                     Kue Khitan
                 </a>
                 <a href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 35 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 32 */;
 		echo '/kategori/kue-ulang-tahun" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
                     Kue Ulang Tahun
                 </a>
                 <a href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 38 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 35 */;
 		echo '/kategori/-tumpeng" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
                     Tumpeng
                 </a>
                 <a href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 41 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 38 */;
 		echo '/kategori/-pudding" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
                     Puding
                 </a>
                 <a href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 44 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 41 */;
 		echo '/kategori/snack-box" class="border-[1px] border-solid border-slate-300 hover:border-slate-400 rounded-[25px] text-[10pt] text-center py-1 px-2 text-bold cursor-pointer">
                     Snack Box
                 </a>
             </div>
         </div>
 ';
-		if ($palinglaku != null) /* line 51 */ {
-			echo '        <div class="palinglaku mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 50%);">
+		if ($palinglaku != null) /* line 48 */ {
+			echo '        <div class="palinglaku mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(199,210,254,1) 0%, rgba(241,245,249,1) 50%);">
             <h2 class="pb-[40px] text-center w-full block font-semibold text-[20pt]">Paling Laku</h2>
             <div id=\'dataPalingLaku\'>
                 <div class="grid grid-cols-6 gap-4">
@@ -223,9 +220,15 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
 
 ';
 		}
-		echo "\n";
-		if ($diskon != null) /* line 140 */ {
-			echo '        <div class="lagipromo mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 50%);">
+		echo '
+        <div class="text-center py-8">
+            <div class="text-[20pt] font-semibold">Rayakan pesta bersama yang spesial dari kreasi kami</div>
+            <div class="text-[20pt] font-semibold">Umieali cake and cookies</div>
+        </div>
+
+';
+		if ($diskon != null) /* line 142 */ {
+			echo '        <div class="lagipromo mt-8 mb-8 px-4 pt-[40px] rounded-t-md" style="background: linear-gradient(180deg, rgba(132,204,22,1) 0%, rgba(241,245,249,1) 50%);">
             <h2 class="pb-[40px] text-center w-full block font-bold text-[20pt]">Lagi Promo Nie.. Lumayan Hemat Beberapa Persen. Ayo!</h2>
             <div id=\'dataDiskon\'>
                 <div class="grid grid-cols-6 gap-4">
@@ -877,23 +880,23 @@ final class Template2bae4cf2c3 extends Latte\Runtime\Template
 	}
 
 
-	/** {block pluginjs} on line 790 */
+	/** {block pluginjs} on line 792 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 791 */
+	/** {block pagejs} on line 793 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		echo '    <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 792 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 794 */;
 		echo '/assets/jsa/home/carousel.js"></script>
 ';
 	}
 
 
-	/** {block footer} on line 795 */
+	/** {block footer} on line 797 */
 	public function blockFooter(array $ʟ_args): void
 	{
 	}

@@ -64,7 +64,7 @@ final class Template691be41611 extends Latte\Runtime\Template
 	/** {block body} on line 7 */
 	public function blockBody(array $ʟ_args): void
 	{
-		echo 'bg-slate-200';
+		echo 'bg-slate-100';
 	}
 
 
