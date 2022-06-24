@@ -1,9 +1,9 @@
 # AbieSoft
 Singkatnya abiesoft itu berasal dari kata Abie dan Software. Abie sendiri merupakan panggilan saya dan software adalah perangkat lunak.
-AbieSoft ini kerangka untuk membuat aplikasi berbasis php. Teknologi yang digunakannya meliputi html, css, javascript, php, latte template engine dan tailwind css.
+AbieSoft ini kerangka untuk membuat aplikasi berbasis php. Teknologi yang digunakannya meliputi html, css, <a href='https://www.javascript.com/'>javascript</a>, <a href='https://www.php.net/releases/8.0/en.php'>php</a>, <a href='https://latte.nette.org/'>latte template engine</a> dan <a href='https://tailwindcss.com/'>tailwind css</a>.
 
 # Spesifikasi
-php yang dibutuhkan php 8.0, karena dalam pembuatannya saya banyak menggunakan fungsi <code>match</code> fitur baru php yang dimana fungsi tersebut baru ada di php 8.0.
+php yang dibutuhkan <a href='https://www.php.net/releases/8.0/en.php'>php 8.0</a>, karena dalam pembuatannya saya banyak menggunakan fungsi <code>match</code> fitur baru php yang dimana fungsi tersebut baru ada di <a href='https://www.php.net/releases/8.0/en.php'>php 8.0</a>.
 sehingga jika di local kita menggunakan php 8 ke bawah akan ada error.
 
 # Instalasi
