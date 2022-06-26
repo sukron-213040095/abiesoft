@@ -37,7 +37,7 @@ final class TranslatorExtension extends Latte\Extension
 	{
 		return [
 			'_' => [$this, 'parseTranslate'],
-			'translate' => fn(Tag $tag): \Generator => Nodes\TranslateNode::create($tag, $this->key ? $this->translator : null),
+			'translate' => fn(Tag $tag) => yield from Nodes\TranslateNode::create($tag, $this->key ? $this->translator : null),
 		];
 	}
 
@@ -66,7 +66,7 @@ final class TranslatorExtension extends Latte\Extension
 		$tag->outputMode = $tag::OutputKeepIndentation;
 		$tag->expectArguments();
 		$node = new PrintNode;
-		$node->expression = $tag->parser->parseExpression();
+		$node->expression = $tag->parser->parseUnquotedStringOrExpression();
 		$args = new Php\Expression\ArrayNode;
 		if ($tag->parser->stream->tryConsume(',')) {
 			$args = $tag->parser->parseArguments();

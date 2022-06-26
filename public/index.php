@@ -13,7 +13,6 @@ use App\Controllers\WebserviceController;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-
 require_once __DIR__ . "/../vendor/PHPQRCode/qrlib.php";
 require_once __DIR__ . "/../vendor/phpmailer/phpmailer/src/Exception.php";
 require_once __DIR__ . "/../vendor/phpmailer/phpmailer/src/PHPMailer.php";

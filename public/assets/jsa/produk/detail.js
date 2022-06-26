@@ -58,80 +58,79 @@ function loadDataProduk(ID){
     produk.postMessage([BASEURL,APIKEY,ID]);
     produk.onmessage = function(e) {
         let data = e.data;
-        let infodiskon = "";
-        let potongan = 0;
-        let hargafinal = 0;
-        let hargafinalint = 0;
-        if(data[0].diskon != 0){
-            potongan = Math.round(data[0].harga / 100 * data[0].diskon).toFixed(0);
-            hargafinal = (data[0].harga - potongan).toLocaleString();
-            hargafinalint = data[0].harga - potongan;
-            infodiskon = `
-                <div class="flex justify-left items-center">
-                    <div class="bg-red-50 text-red-600 font-bold px-2 text-[10pt]">`+data[0].diskon+`%</div>
-                    <div class="px-2 line-through">Rp.`+data[0].harga.toLocaleString()+`</div>
-                </div>
-            `;
-        }else{
-            hargafinal = data[0].harga.toLocaleString();
-            hargafinalint = data[0].harga;
-        }
-        document.getElementById('stok').innerHTML = data[0].stok;
-        document.getElementById('iptstok').value = data[0].stok;
-        document.getElementById('hargaitem').value = hargafinalint;
-        document.getElementById('subtotal').innerHTML = hargafinal;
-        if(data[0].diskon != 0){
-            document.getElementById('hargaasli').value = data[0].harga;
-            document.getElementById('totalHargaAsli').innerHTML = "Rp. "+data[0].harga.toLocaleString();
-        }else{
-            document.getElementById('hargaasli').value = 0;
-            document.getElementById('totalHargaAsli').innerHTML = "";
-        }
-        let onlinestatus = `<div class="relative h-[20px]"><div class="absolute  px-4 text-white bg-red-600 rounded-md">offline</div></div>`;
-        if(data[0].status == "online"){
-            onlinestatus = `<div class="relative h-[20px]"><div class="absolute px-4 text-white bg-green-400 rounded-md">online</div></div>`;
-        }
-        document.getElementById('boxDetailInfo').innerHTML = `
-            <div class="grid grid-cols-2 gap-2 mb-8">
-                <div class="flex justify-center items-top">
-                    <div class="w-[300px] h-[350px] bg-slate-400">
-                        <img src='`+data[0].gambar+`' class="w-[300px] h-[350px] object-cover">
+
+        if(data[0].nama != null){
+            let infodiskon = "";
+            let potongan = 0;
+            let hargafinal = 0;
+            let hargafinalint = 0;
+            if(data[0].diskon != 0){
+                potongan = Math.round(data[0].harga / 100 * data[0].diskon).toFixed(0);
+                hargafinal = (data[0].harga - potongan).toLocaleString();
+                hargafinalint = data[0].harga - potongan;
+                infodiskon = `
+                    <div class="flex justify-left items-center">
+                        <div class="bg-red-50 text-red-600 font-bold px-2 text-[10pt]">`+data[0].diskon+`%</div>
+                        <div class="px-2 line-through">Rp.`+data[0].harga.toLocaleString()+`</div>
                     </div>
-                </div>
-                <div>
-                    <h2 class="text-[14pt] font-semibold">`+data[0].nama+`</h2>
-                    <div class="flex justify-left items-center text-[10pt]">
-                        <div class="pr-2 py-1 rounded-[25px] flex justify-center items-center">
-                            <span>Terjual</span>
-                            <span class='text-[10pt] ml-[5px] font-semibold'>`+data[0].laku+`</span>
-                        </div>
-                        <div class="pr-2 font-semibold">.</div>
-                        <div class="pr-2 py-1 rounded-[25px] flex justify-center items-center">
-                            <button class="hover:text-sky-400" onClick='likeThis(this.id)' id="sukaterbaru`+data[0].id+`"><i class="las la-heart"></i></button>
-                            <span class='text-[10pt] ml-[5px] font-semibold'>`+data[0].suka+`</span>
+                `;
+            }else{
+                hargafinal = data[0].harga.toLocaleString();
+                hargafinalint = data[0].harga;
+            }
+            document.getElementById('stok').innerHTML = data[0].stok;
+            document.getElementById('iptstok').value = data[0].stok;
+            document.getElementById('hargaitem').value = hargafinalint;
+            document.getElementById('subtotal').innerHTML = hargafinal;
+            if(data[0].diskon != 0){
+                document.getElementById('hargaasli').value = data[0].harga;
+                document.getElementById('totalHargaAsli').innerHTML = "Rp. "+data[0].harga.toLocaleString();
+            }else{
+                document.getElementById('hargaasli').value = 0;
+                document.getElementById('totalHargaAsli').innerHTML = "";
+            }
+            let onlinestatus = `<div class="relative h-[20px]"><div class="absolute  px-4 text-white bg-red-600 rounded-md">offline</div></div>`;
+            if(data[0].status == "online"){
+                onlinestatus = `<div class="relative h-[20px]"><div class="absolute px-4 text-white bg-green-400 rounded-md">online</div></div>`;
+            }
+            document.getElementById('boxDetailInfo').innerHTML = `
+                <div class="grid grid-cols-2 gap-2 mb-8">
+                    <div class="flex justify-center items-top">
+                        <div class="w-[300px] h-[350px] bg-slate-400">
+                            <img src='`+data[0].gambar+`' class="w-[300px] h-[350px] object-cover">
                         </div>
                     </div>
                     <div>
-                        <div class="text-[26pt] font-semibold">Rp. `+hargafinal+`</div>
-                        `+infodiskon+`
-                    </div>
-                    <div class="mt-4 mb-4 border-t-[1px] border-b-[1px] border-solid border-gray-300 flex justify-left items-center">
-                        <button type='button' id='btnTabDetailProduk' class='px-4 py-2 outline-none border-b-[2px] border-solid border-sky-600 text-sky-600 font-semibold' onClick="showTabDetail()">Detail</button>
-                        <button type='button' id='btnTabInfoProduk' class='px-4 py-2 border-b-[2px] hover:text-sky-600 font-semibold' onClick="showTabInfoPenting()">Pengiriman dan Pembayaran</button>
-                    </div>
-                    <div id='tabInfoProduk'>...</div>
-                    <div class="py-4 mt-4 mb-4 border-t-[1px] border-b-[1px] border-solid border-gray-300 flex justify-left items-center">
-                        <div class="w-[50px] h-[50px] rounded-[50%] overflow-hidden">
-                            <img src='`+data[0].photouser+`' class="w-[50px] h-[50px] object-cover">
+                        <h2 class="text-[14pt] font-semibold">`+data[0].nama+`</h2>
+                        <div class="flex justify-left items-center text-[10pt]">
+                            <div class="pr-2 py-1 rounded-[25px] flex justify-center items-center">
+                                <span>Terjual</span>
+                                <span class='text-[10pt] ml-[5px] font-semibold'>`+data[0].laku+`</span>
+                            </div>
                         </div>
-                        <div class="text-[10pt] pl-4">
-                            <div class="font-semibold">`+data[0].namauser+`</div>
-                            `+onlinestatus+`
+                        <div>
+                            <div class="text-[26pt] font-semibold">Rp. `+hargafinal+`</div>
+                            `+infodiskon+`
+                        </div>
+                        <div class="mt-4 mb-4 border-t-[1px] border-b-[1px] border-solid border-gray-300 flex justify-left items-center">
+                            <button type='button' id='btnTabDetailProduk' class='px-4 py-2 outline-none border-b-[2px] border-solid border-sky-600 text-sky-600 font-semibold' onClick="showTabDetail()">Detail</button>
+                            <button type='button' id='btnTabInfoProduk' class='px-4 py-2 border-b-[2px] hover:text-sky-600 font-semibold' onClick="showTabInfoPenting()">Pengiriman dan Pembayaran</button>
+                        </div>
+                        <div id='tabInfoProduk'>...</div>
+                        <div class="py-4 mt-4 mb-4 border-t-[1px] border-b-[1px] border-solid border-gray-300 flex justify-left items-center">
+                            <div class="w-[50px] h-[50px] rounded-[50%] overflow-hidden">
+                                <img src='`+data[0].photouser+`' class="w-[50px] h-[50px] object-cover">
+                            </div>
+                            <div class="text-[10pt] pl-4">
+                                <div class="font-semibold">`+data[0].namauser+`</div>
+                                `+onlinestatus+`
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
+
         showTabDetail();
         cekItem(ID);
     }
@@ -284,8 +283,8 @@ function cekItem(ID){
     item.postMessage([BASEURL,APIKEY,ID]);
     item.onmessage = function(e) {
         let data = e.data;
-        console.log(data[0]);
-        if(data[0].jumlah != undefined){
+
+        if(data[0].jumlah != undefined || data[0].nama != null){
             document.getElementById('transaksi').innerHTML = `
                 <div class="bg-slate-50 p-2 text-[11pt] relative">
                     <button onClick='hapusItem()' type='button' class="text-[10pt] font-bold absolute right-[5px] top=[-3px] hover:text-sky-400"><i class="las la-times"></i></button>
@@ -327,6 +326,7 @@ function likeThis(id){
     suka.postMessage([BASEURL,APIKEY,id]);
     suka.onmessage = function(e) {
         let data = e.data;
+        console.log(data[0]);
         if(data[0].message == "Disukai"){
             document.getElementById(id).setAttribute('class','absolute text-red-500 font-bold text-[14pt] right-[5px] top-[0px]');
         }else{

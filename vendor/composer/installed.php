@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => 'ccbdead081c50cb75bb90377dbeb8f82930b15de',
         'name' => 'areth/abiesoft',
         'dev' => true,
     ),
     'versions' => array(
         'areth/abiesoft' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => 'ccbdead081c50cb75bb90377dbeb8f82930b15de',
             'dev_requirement' => false,
         ),
         'firebase/php-jwt' => array(
@@ -47,12 +47,12 @@
             'dev_requirement' => false,
         ),
         'latte/latte' => array(
-            'pretty_version' => 'v3.0.1',
-            'version' => '3.0.1.0',
+            'pretty_version' => 'v3.0.2',
+            'version' => '3.0.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../latte/latte',
             'aliases' => array(),
-            'reference' => '1eee22c760ab8d028e2c21f87fbb7ef7bfeaa0b5',
+            'reference' => 'c3eee2e4e2c21cdf9f9c158c4bfa6150625457e1',
             'dev_requirement' => false,
         ),
         'nette/utils' => array(
@@ -65,12 +65,12 @@
             'dev_requirement' => false,
         ),
         'phpmailer/phpmailer' => array(
-            'pretty_version' => 'v6.6.0',
-            'version' => '6.6.0.0',
+            'pretty_version' => 'v6.6.3',
+            'version' => '6.6.3.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpmailer/phpmailer',
             'aliases' => array(),
-            'reference' => 'e43bac82edc26ca04b36143a48bde1c051cfd5b1',
+            'reference' => '9400f305a898f194caff5521f64e5dfa926626f3',
             'dev_requirement' => false,
         ),
         'phpoffice/phpword' => array(

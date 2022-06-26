@@ -30,15 +30,8 @@ final class TemplateLexer
 	private const ReHtmlValue = '[^\p{C} "\'<>=`{}]+';
 	private const StateEnd = 'end';
 
-	/** @var array<string, array{string, string}> */
-	public array $syntaxes = [
-		'latte' => ['\{(?![\s\'"{}])', '\}'], // {...}
-		'double' => ['\{\{(?![\s\'"{}])', '\}\}'], // {{...}}
-		'off' => ['\{(?=/syntax\})', '\}'], // {/syntax}
-	];
-
-	/** @var string[] */
-	private array $delimiters;
+	public string $openDelimiter;
+	public string $closeDelimiter;
 	private TagLexer $tagLexer;
 
 	/** @var array<array{name: string, args: mixed[]}> */
@@ -77,8 +70,8 @@ final class TemplateLexer
 			(?<Text>.+?)??
 			(?<Indentation>(?<=\n|^)[ \t]+)?
 			(
-				(?<Latte_TagOpen>' . $this->delimiters[0] . '(?!\*))|      # {tag
-				(?<Latte_CommentOpen>' . $this->delimiters[0] . '\*)|      # {* comment
+				(?<Latte_TagOpen>' . $this->openDelimiter . '(?!\*))|      # {tag
+				(?<Latte_CommentOpen>' . $this->openDelimiter . '\*)|      # {* comment
 				$
 			)
 		~xsiAuD');
@@ -105,7 +98,7 @@ final class TemplateLexer
 
 		yield from $this->match('~
 			(?<Slash>/)?
-			(?<Latte_TagClose>' . $this->delimiters[1] . ')
+			(?<Latte_TagClose>' . $this->closeDelimiter . ')
 			(?<Newline>[ \t]*\R)?
 		~xsiAu');
 	}
@@ -116,7 +109,7 @@ final class TemplateLexer
 		$this->popState();
 		yield from $this->match('~
 			(?<Text>.+?)??
-			(?<Latte_CommentClose>\*' . $this->delimiters[1] . ')
+			(?<Latte_CommentClose>\*' . $this->closeDelimiter . ')
 			(?<Newline>[ \t]*\R{1,2})?
 		~xsiAu');
 	}
@@ -130,8 +123,8 @@ final class TemplateLexer
 				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Html_TagOpen><)(?<Slash>/)?(?<Html_Name>' . self::ReTagName . ')|  # <tag </tag
 				(?<Html_CommentOpen><!--(?!>|->))|                                                      # <!-- comment
 				(?<Html_BogusOpen><[/?!])|                                                              # <!doctype <?xml or error
-				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Latte_TagOpen>' . $this->delimiters[0] . '(?!\*))|   # {tag
-				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Latte_CommentOpen>' . $this->delimiters[0] . '\*)|   # {* comment
+				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Latte_TagOpen>' . $this->openDelimiter . '(?!\*))|   # {tag
+				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Latte_CommentOpen>' . $this->openDelimiter . '\*)|   # {* comment
 				$
 			)
 		~xsiAuD');
@@ -161,8 +154,8 @@ final class TemplateLexer
 			(?<Quote>["\'])|
 			(?<Slash>/)?(?<Html_TagClose>>)(?<Newline>[ \t]*\R)?|      # > />
 			(?<Html_Name>' . self::ReHtmlName . ')|                    # HTML attribute name/value
-			(?<Latte_TagOpen>' . $this->delimiters[0] . '(?!\*))|      # {tag
-			(?<Latte_CommentOpen>' . $this->delimiters[0] . '\*)       # {* comment
+			(?<Latte_TagOpen>' . $this->openDelimiter . '(?!\*))|      # {tag
+			(?<Latte_CommentOpen>' . $this->openDelimiter . '\*)       # {* comment
 		~xsiAu');
 
 		if (isset($m['Html_Name'])) {
@@ -201,8 +194,8 @@ final class TemplateLexer
 		$m = yield from $this->match('~
 			(?<Text>.+?)??(
 				(?<Quote>' . $quote . ')|
-				(?<Latte_TagOpen>' . $this->delimiters[0] . '(?!\*))|      # {tag
-				(?<Latte_CommentOpen>' . $this->delimiters[0] . '\*)       # {* comment
+				(?<Latte_TagOpen>' . $this->openDelimiter . '(?!\*))|      # {tag
+				(?<Latte_CommentOpen>' . $this->openDelimiter . '\*)       # {* comment
 			)
 		~xsiAu');
 
@@ -239,8 +232,8 @@ final class TemplateLexer
 			(?<Indentation>(?<=\n|^)[ \t]+)?
 			(
 				(?<Html_TagOpen><)(?<Slash>/)(?<Html_Name>' . preg_quote($tagName, '~') . ')|  # </tag
-				(?<Latte_TagOpen>' . $this->delimiters[0] . '(?!\*))|                          # {tag
-				(?<Latte_CommentOpen>' . $this->delimiters[0] . '\*)|                          # {* comment
+				(?<Latte_TagOpen>' . $this->openDelimiter . '(?!\*))|                          # {tag
+				(?<Latte_CommentOpen>' . $this->openDelimiter . '\*)|                          # {* comment
 				$
 			)
 		~xsiAu');
@@ -263,8 +256,8 @@ final class TemplateLexer
 			(?<Text>.+?)??
 			(
 				(?<Html_CommentClose>-->)|                                                              # -->
-				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Latte_TagOpen>' . $this->delimiters[0] . '(?!\*))|   # {tag
-				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Latte_CommentOpen>' . $this->delimiters[0] . '\*)    # {* comment
+				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Latte_TagOpen>' . $this->openDelimiter . '(?!\*))|   # {tag
+				(?<Indentation>(?<=\n|^)[ \t]+)?(?<Latte_CommentOpen>' . $this->openDelimiter . '\*)    # {* comment
 			)
 		~xsiAu');
 
@@ -285,8 +278,8 @@ final class TemplateLexer
 		$m = yield from $this->match('~
 			(?<Text>.+?)??(
 				(?<Html_TagClose>>)|                                       # >
-				(?<Latte_TagOpen>' . $this->delimiters[0] . '(?!\*))|      # {tag
-				(?<Latte_CommentOpen>' . $this->delimiters[0] . '\*)       # {* comment
+				(?<Latte_TagOpen>' . $this->openDelimiter . '(?!\*))|      # {tag
+				(?<Latte_CommentOpen>' . $this->openDelimiter . '\*)       # {* comment
 			)
 		~xsiAu');
 
@@ -359,26 +352,21 @@ final class TemplateLexer
 
 
 	/**
-	 * Changes macro tag delimiters.
+	 * Changes tag delimiters.
 	 */
-	public function setSyntax(?string $type): static
+	public function setSyntax(?string $type, ?string $endTag = null): static
 	{
-		$type ??= 'latte';
-		if (!isset($this->syntaxes[$type])) {
-			throw new \InvalidArgumentException("Unknown syntax '$type'");
-		}
+		$left = '\{(?![\s\'"{}])';
+		$end = $endTag ? '\{/' . preg_quote($endTag, '~') . '\}' : null;
 
-		$this->setDelimiters($this->syntaxes[$type][0], $this->syntaxes[$type][1]);
-		return $this;
-	}
-
-
-	/**
-	 * Changes macro tag delimiters (as regular expression).
-	 */
-	public function setDelimiters(string $left, string $right): static
-	{
-		$this->delimiters = [$left, $right];
+		[$this->openDelimiter, $this->closeDelimiter] = match ($type) {
+			null => [$left, '\}'], // {...}
+			'off' => [$endTag ? '(?=' . $end . ')\{' : '(?!x)x', '\}'],
+			'double' => $endTag // {{...}}
+				? ['(?:\{' . $left . '|(?=' . $end . ')\{)', '\}(?:\}|(?<=' . $end . '))']
+				: ['\{' . $left, '\}\}'],
+			default => throw new \InvalidArgumentException("Unknown syntax '$type'"),
+		};
 		return $this;
 	}
 

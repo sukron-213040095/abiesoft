@@ -71,6 +71,7 @@ class AuthController extends Controller
 
     public function login()
     {
+
         if (self::isLogin()) {
             Lanjut::ke('/');
         } else {

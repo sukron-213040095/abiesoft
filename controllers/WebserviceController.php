@@ -272,7 +272,7 @@ class WebserviceController extends Controller
             $items->slug = $p->slug;
             $items->gambar = $p->gambar;
             $items->keterangan = Format::simpel($p->keterangan, 53);
-            $items->harga = $p->harga;
+            $items->harga = Format::uang($p->harga);
             $items->diskon = $p->diskon . "%";
             $list[] = $items;
         }
@@ -291,7 +291,7 @@ class WebserviceController extends Controller
             $items->slug = $p->slug;
             $items->gambar = $p->gambar;
             $items->keterangan = Format::simpel($p->keterangan, 53);
-            $items->harga = $p->harga;
+            $items->harga = Format::uang($p->harga);
             $items->diskon = $p->diskon . "%";
             $list[] = $items;
         }
