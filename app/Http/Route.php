@@ -35,6 +35,7 @@ class Route extends Request
         Route::get('/reset{:rid}', [$class, 'reset']);
         Route::post('/set_reset', [$class, 'setReset']);
         Route::get('/registrasi', [$class, 'registrasi']);
+        Route::get('/registrasi{:nama}{:email}', [$class, 'registrasi']);
         Route::post('/set_registrasi', [$class, 'setRegistrasi']);
         Route::get('/remove', [$class, 'removeLockscreen']);
     }

@@ -10,10 +10,11 @@ use AbieSoft\Utilities\Input;
 use AbieSoft\Utilities\Cookies;
 use AbieSoft\Utilities\Guard;
 use AbieSoft\Utilities\Hash;
-use AbieSoft\Utilities\Metafile;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Google_Client;
+use Nette\Utils\Html;
 
 class AuthController extends Controller
 {
@@ -72,6 +73,15 @@ class AuthController extends Controller
     public function login()
     {
 
+        $client = new Google_Client();
+        $client->setClientId(\AbieSoft\Utilities\Config::envReader('GOOGLE_CLIENT_ID'));
+        $client->setClientSecret(\AbieSoft\Utilities\Config::envReader('GOOGLE_CLIENT_SECRET'));
+        $client->setRedirectUri(\AbieSoft\Utilities\Config::envReader('GOOGLE_REDIRECT_URL'));
+        $client->addScope('email');
+        $client->addScope('profile');
+
+        $googleLogin = $client->createAuthUrl();
+
         if (self::isLogin()) {
             Lanjut::ke('/');
         } else {
@@ -108,7 +118,8 @@ class AuthController extends Controller
                             page: '../theme/auth/login',
                             data: [
                                 'title' => 'Login',
-                                'reset' => $message
+                                'reset' => $message,
+                                'googleLogin' => $googleLogin
                             ]
                         );
                     } else {
@@ -118,7 +129,8 @@ class AuthController extends Controller
                             page: '../theme/auth/login',
                             data: [
                                 'title' => 'Login',
-                                'reset' => $message
+                                'reset' => $message,
+                                'googleLogin' => $googleLogin
                             ]
                         );
                     }
@@ -129,7 +141,8 @@ class AuthController extends Controller
                         page: '../theme/auth/login',
                         data: [
                             'title' => 'Login',
-                            'reset' => $message
+                            'reset' => $message,
+                            'googleLogin' => $googleLogin
                         ]
                     );
                 }
@@ -149,7 +162,8 @@ class AuthController extends Controller
                     page: '../theme/auth/login',
                     data: [
                         'title' => 'Login',
-                        'reset' => $message
+                        'reset' => $message,
+                        'googleLogin' => $googleLogin
                     ]
                 );
             }
@@ -382,11 +396,28 @@ class AuthController extends Controller
 
     public function registrasi()
     {
+
+        if (Cookies::ada('ABIESOFT-REGISTRASI')) {
+            $googleAkun = "Ada";
+        } else {
+            $googleAkun = "Tidak Ada";
+        }
+        Cookies::hapus('ABIESOFT-REGISTRASI');
         if (\AbieSoft\Utilities\Define::$showoffRegistrasi) {
+            if (Input::get('nama') && Input::get('email')) {
+                $nama = Input::get('nama');
+                $email = Input::get('email');
+            } else {
+                $nama = "";
+                $email = "";
+            }
             return $this->view(
                 page: '../theme/auth/registrasi',
                 data: [
-                    'title' => 'Registrasi'
+                    'title' => 'Registrasi',
+                    'nama' => $nama,
+                    'email' => $email,
+                    'googleAkun' => $googleAkun
                 ]
             );
         } else {
@@ -575,7 +606,9 @@ class AuthController extends Controller
             $jwt = Cookies::lihat('ABIESOFT-SCT');
             $email = JWT::decode($jwt, new Key(Config::envReader('WEB_TOKEN'), 'HS256'))->email;
             $user = self::cariuser($email);
-            if ($user->photo != null) {
+            if (count(explode("://", $user->photo)) > 1) {
+                self::$_photo = $user->photo;
+            } else if ($user->photo != null) {
                 if (file_exists(__DIR__ . "/../../public" . $user->photo)) {
                     self::$_photo = Config::envReader('BASEURL') . $user->photo;
                 } else {

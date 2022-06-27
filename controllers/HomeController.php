@@ -5,6 +5,7 @@ namespace App\Controllers;
 use AbieSoft\Auth\AuthController;
 use AbieSoft\Http\Controller;
 use AbieSoft\Mysql\DB;
+use AbieSoft\Utilities\Input;
 
 class HomeController extends Controller
 {

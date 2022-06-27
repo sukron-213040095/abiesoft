@@ -2,7 +2,8 @@
 {if \AbieSoft\Utilities\GetUri::currentPage() != "login" 
 && \AbieSoft\Utilities\GetUri::currentPage() != "registrasi"
 && \AbieSoft\Utilities\GetUri::currentPage() != "syaratketentuan"
-&& \AbieSoft\Utilities\GetUri::currentPage() != "login?next=http:"}
+&& \AbieSoft\Utilities\GetUri::currentPage() != "login?next=http:"
+&& \AbieSoft\Utilities\GetUri::currentPage() != \AbieSoft\Utilities\GetUri::cekSlug('registrasi')}
 <div class="h-[80px]"></div>
 <div class="fixed top-0 left-0 right-0 z-[999]">
     <div class="bg-white p-4 shadow-sm">

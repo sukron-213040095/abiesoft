@@ -82,6 +82,10 @@ final class Templatee63cd89a4f extends Latte\Runtime\Template
 	/** {block content} on line 11 */
 	public function blockContent(array $ʟ_args): void
 	{
+		extract($this->params);
+		extract($ʟ_args);
+		unset($ʟ_args);
+
 		echo '    <div class="text-center pt-[25px] pb-[50px] flex justify-center">
         <a href="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 13 */;
@@ -102,14 +106,16 @@ final class Templatee63cd89a4f extends Latte\Runtime\Template
                             <div>Belum punya akun? <a href="/registrasi" class="text-sky-700 hover:text-amber-500">Registrasi</a></div>
                         </div>
                         <div class="p-4 text-center">
-                            <button type="button" class="w-[100%] px-8 py-2 border radius-lg border-gray-200 font-semibold">
+                            <a href=\'';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($googleLogin)) /* line 28 */;
+		echo '\' type="button" class="w-[100%] px-8 py-2 border radius-lg border-gray-200 font-semibold">
                                 <div class="flex justify-center aligns-center h-[25px]">
                                     <img src="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 30 */;
 		echo '/assets/media/images/logo_google.png" class="w-[25px] h-[25px] mr-[10px]">
                                     <div>Login dengan Google</div>
                                 </div>
-                            </button>
+                            </a>
                         </div>
                         <div class="p-4 flex justify-center aligns-center">
                             <div class="h-[1px] w-full bg-gray-200">&nbsp;</div>
@@ -119,7 +125,7 @@ final class Templatee63cd89a4f extends Latte\Runtime\Template
                         <div class="px-4">
                             <div class="mb-2">
                                 <label class="text-[10pt]" for="email">Email</label>
-                                <input id="email" name="email" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Email" autocomplete="off">
+                                <input id="email" name="email" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Email">
                             </div>
                             <div class="mb-2">
                                 <label class="text-[10pt]" for="password">Password</label>

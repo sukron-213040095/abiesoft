@@ -15,9 +15,9 @@
     "require": {
         "latte/latte": "^3.0",
         "firebase/php-jwt": "^6.2",
-        "google/apiclient-services": "^0.252.0",
         "nette/utils": "^3.2",
         "phpmailer/phpmailer": "^6.6",
-        "phpoffice/phpword": "^0.18.3"
+        "phpoffice/phpword": "^0.18.3",
+        "google/apiclient": "^2.12"
     }
 }

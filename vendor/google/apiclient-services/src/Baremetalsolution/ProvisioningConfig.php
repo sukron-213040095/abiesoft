@@ -51,6 +51,10 @@ class ProvisioningConfig extends \Google\Collection
   /**
    * @var string
    */
+  public $statusMessage;
+  /**
+   * @var string
+   */
   public $ticketId;
   /**
    * @var string
@@ -58,6 +62,10 @@ class ProvisioningConfig extends \Google\Collection
   public $updateTime;
   protected $volumesType = VolumeConfig::class;
   protected $volumesDataType = 'array';
+  /**
+   * @var bool
+   */
+  public $vpcScEnabled;
 
   /**
    * @param string
@@ -174,6 +182,20 @@ class ProvisioningConfig extends \Google\Collection
   /**
    * @param string
    */
+  public function setStatusMessage($statusMessage)
+  {
+    $this->statusMessage = $statusMessage;
+  }
+  /**
+   * @return string
+   */
+  public function getStatusMessage()
+  {
+    return $this->statusMessage;
+  }
+  /**
+   * @param string
+   */
   public function setTicketId($ticketId)
   {
     $this->ticketId = $ticketId;
@@ -212,6 +234,20 @@ class ProvisioningConfig extends \Google\Collection
   public function getVolumes()
   {
     return $this->volumes;
+  }
+  /**
+   * @param bool
+   */
+  public function setVpcScEnabled($vpcScEnabled)
+  {
+    $this->vpcScEnabled = $vpcScEnabled;
+  }
+  /**
+   * @return bool
+   */
+  public function getVpcScEnabled()
+  {
+    return $this->vpcScEnabled;
   }
 }
 

@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use AbieSoft\Auth\AuthController;
 use AbieSoft\Http\Controller;
-use AbieSoft\Models\Template;
 use Nette\Utils\Html;
 
 class TemplateController extends Controller

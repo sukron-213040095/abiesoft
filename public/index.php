@@ -6,6 +6,7 @@ use AbieSoft\Http\Route;
 use AbieSoft\Auth\AuthController;
 use AbieSoft\Http\Lanjut;
 use AbieSoft\Utilities\Define;
+use App\Controllers\GoogleLoginController;
 use App\Controllers\HomeController;
 use App\Controllers\KategoriController;
 use App\Controllers\KeranjangController;
@@ -61,6 +62,8 @@ Route::get('/keranjang{:apikey}', [KeranjangController::class, 'cart']);
 */
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/registrasiByGoogle', [GoogleLoginController::class, 'registrasiByGoogle']);
+Route::get('/{:code}{:scope}{:authuser}{:hd}{:prompt}', [GoogleLoginController::class, 'login']);
 Route::get('/order/checkout', [OrderController::class, 'checkout']);
 Route::sistem(AuthController::class);
 Route::get('/webservice/user{:apikey}{:opsi}', [WebserviceController::class, 'profile']);
