@@ -20,3 +20,5 @@ untuk WEB_DOMAIN nya bisa dikosongkan</div>
 <div>Jika anda menginginkan menyimpan folder abiesoft disembarang tempat anda bisa langsung menjalankan aplikasinya dengan menggunakan perintah 
 <code>php abiesoft start</code>. tapi sebelum menjalankan perinta tersebut pastikan dulu WEB_DOMAIN berupa ip local misalkan <code>WEB_DOMAIN=127.0.0.1:8000</code> maka 
 <code>BASEURL=http://127.0.0.1:8000</code> baru kemudian jalankan perintah <code>php abiesoft start</code></div>
+<div>Catatan</div>
+<div>Untuk login dengan google dan registrasi dengan google hanya bisa berjalan di base url http://127.0.0.1:8000</div>
