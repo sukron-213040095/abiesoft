@@ -28,8 +28,8 @@ final class Template3443c85a7e extends Latte\Runtime\Template
 ';
 		$this->renderBlock('content', get_defined_vars()) /* line 9 */;
 		echo "\n";
-		$this->renderBlock('pluginjs', get_defined_vars()) /* line 68 */;
-		$this->renderBlock('pagejs', get_defined_vars()) /* line 69 */;
+		$this->renderBlock('pluginjs', get_defined_vars()) /* line 95 */;
+		$this->renderBlock('pagejs', get_defined_vars()) /* line 96 */;
 	}
 
 
@@ -86,7 +86,34 @@ final class Template3443c85a7e extends Latte\Runtime\Template
     <div class="grid grid-cols-3 gap-2 mb-8">
 
         <div class="col-span-2">
-            <div id=\'boxDetailInfo\'></div>
+            <div id=\'boxDetailInfo\'>
+                <div class="grid grid-cols-2 gap-2 mb-8">
+                    <div class="flex justify-center items-top">
+                        <div class="w-[300px] h-[350px] bg-slate-200 shimmer"></div>
+                    </div>
+                    <div>
+                        <div>
+                            <div class="mt-2 w-[200px] h-[25px] bg-slate-200 shimmer"></div>
+                        </div>
+                        <div>
+                            <div class="mt-2 w-[80px] h-[16px] bg-slate-200 shimmer"></div>
+                        </div>
+                         <div>
+                            <div class="mt-2 w-[150px] h-[45px] bg-slate-200 shimmer"></div>
+                        </div>
+                        <div>
+                            <div class="mt-8 w-[200px] h-[25px] bg-slate-200 shimmer"></div>
+                        </div>
+                        <div>
+                            <div class="mt-8 w-[300px] h-[25px] bg-slate-200 shimmer"></div>
+                        </div>
+                        <div class="flex justify-left items-center">
+                            <div class="mt-8 w-[50px] h-[50px] rounded-[50%] bg-slate-200 shimmer"></div>
+                            <div class="mt-8 ml-2 w-[80px] h-[16px] bg-slate-200 shimmer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="pl-8">
@@ -96,7 +123,7 @@ final class Template3443c85a7e extends Latte\Runtime\Template
                         <div class="relative h-[34px]">
                             <input type="number" onBlur="if(this.value == \'\'){ this.value = 1; hitungHarga(this.value); }" onKeyUp="hitungHarga(this.value)" class="absolute w-[150px] text-center border-[1px] border-solid border-slate-200 p-1 outline-none font-bold" value="1" id="qty" name="qty">
                             <input type="hidden" id="idproduk" name="idproduk" value="';
-		echo LR\Filters::escapeHtmlAttr($id) /* line 28 */;
+		echo LR\Filters::escapeHtmlAttr($id) /* line 55 */;
 		echo '">
                             <input type="hidden" id="iptstok" name="iptstok" value="0">
                             <input type="hidden" id="hargaitem" name="hargaitem" value="0">
@@ -112,20 +139,20 @@ final class Template3443c85a7e extends Latte\Runtime\Template
                         </div>
                         <div id="transaksi" class="mt-4 mb-4"></div>
                         <div class="relative pt-[20px]">
-                            <div id=\'totalHargaAsli\' class="absolute line-through right-0 mt-[-20px]">Rp. 0</div>
+                            <div id=\'totalHargaAsli\' class="absolute line-through right-0 mt-[-20px]"></div>
                             <div class="flex justify-between items-center">
                                 <div>Subtotal</div>
                                 <div class="font-bold text-[18pt]">Rp. <span id="subtotal">0</span></div>
                             </div>
                         </div>
 ';
-		if (\AbieSoft\Auth\AuthController::isLogin()) /* line 49 */ {
+		if (\AbieSoft\Auth\AuthController::isLogin()) /* line 76 */ {
 			echo '                            <div class="mt-4 grid grid-cols-2 gap-2">
                                 <button class="bg-sky-400 text-white px-4 py-2 rounded-md hover:bg-[rgba(56,189,248,.8)]" type=\'submit\' id=\'btnKeranjang\'><i class="las la-plus"></i> Keranjang</button>
                                 <button class="border-[2px] border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type=\'button\'>Beli</button>
                             </div>
 ';
-		} else /* line 54 */ {
+		} else /* line 81 */ {
 			echo '                            <div class="mt-4 grid grid-cols-1 gap-2">
                                 <button class="border-[2px] w-full border-solid border-sky-400 text-sky-400 px-8 py-2 rounded-md hover:border-[rgba(56,189,248,.8)]" type=\'button\' onClick="loginNext(window.location.href)">Login</button>
                             </div>
@@ -142,13 +169,13 @@ final class Template3443c85a7e extends Latte\Runtime\Template
 	}
 
 
-	/** {block pluginjs} on line 68 */
+	/** {block pluginjs} on line 95 */
 	public function blockPluginjs(array $ʟ_args): void
 	{
 	}
 
 
-	/** {block pagejs} on line 69 */
+	/** {block pagejs} on line 96 */
 	public function blockPagejs(array $ʟ_args): void
 	{
 		extract($this->params);
@@ -157,14 +184,14 @@ final class Template3443c85a7e extends Latte\Runtime\Template
 
 		echo '<script>
 let SLUG = ';
-		echo LR\Filters::escapeJs($slug) /* line 71 */;
+		echo LR\Filters::escapeJs($slug) /* line 98 */;
 		echo ';
 let ID = ';
-		echo LR\Filters::escapeJs($id) /* line 72 */;
+		echo LR\Filters::escapeJs($id) /* line 99 */;
 		echo ';
 </script>
 <script src="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 74 */;
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(\AbieSoft\Utilities\Config::envReader('BASEURL'))) /* line 101 */;
 		echo '/assets/jsa/produk/detail.js"></script>
 ';
 	}
