@@ -38,13 +38,19 @@ $("form#formRegistrasi").on("submit", function(e) {
             success: function(msg) {
                 if (msg == "Berhasil") {
                     toastr.success("User baru telah dibuat");
-                    btnRegistrasi.removeAttribute("disabled");
-                    btnRegistrasi.innerHTML = `Registrasi`;
-                    document.getElementById("nama").value = "";
-                    document.getElementById("email").value = "";
-                    document.getElementById("password").value = "";
-                    document.getElementById("konfirmasipassword").value = "";
-                    document.getElementById("nama").focus();
+                    document.getElementById('registrasiComplete').innerHTML = `
+                        <div class="bg-white shadow-md radius-md p-4">
+                            <div class="text-center">
+                                <div class="text-[18pt] font-semibold">Registrasi Berhasil</div>
+                                <div class='mt-4'>
+                                    <div class="p-2 bg-green-500 text-white">Registrasi anda berhasil, anda sekarang terdaftar di web umieali cake & cookies. Untuk menggunakan fitur di web ini silahkan login dengan akun anda.</div>
+                                </div>
+                                <div class="mt-2 flex justify-center">
+                                    <a href='/login'  id="btnRegistrasi" name="btnRegistrasi" class="mt-2 radius-lg px-4 py-2 border bg-sky-900 hover:bg-sky-800 text-white font-semibold w-full outline-none">Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
                 } else if (msg == "Cancel") {
                     toastr.error("Gagal registrasi user");
                     btnRegistrasi.removeAttribute("disabled");

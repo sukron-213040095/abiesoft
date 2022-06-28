@@ -57,7 +57,13 @@ class GoogleLoginController extends AuthController
             $password = Hash::make($pass, $salt);
 
             if (Cookies::ada('ABIESOFT-REGISTRASI')) {
-                Lanjut::ke('/registrasi?nama=' . $nama . '&email=' . $email);
+                $payload = [
+                    'nama' => $nama,
+                    'email' => $email
+                ];
+                $jwt = JWT::encode($payload, Config::envReader('WEB_TOKEN'), 'HS256');
+                Cookies::simpan('ABIESOFT-REGISTRASI', $jwt);
+                Lanjut::ke('/registrasi');
             } else {
                 if ($user) {
                     return self::setLoginByGoogle($user->email, $user->password);
@@ -74,10 +80,6 @@ class GoogleLoginController extends AuthController
                 }
             }
         }
-    }
-
-    public function registrasi()
-    {
     }
 
     public static function setLoginByGoogle($email, $pass)

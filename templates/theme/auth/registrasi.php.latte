@@ -19,58 +19,63 @@
                 <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/ilustrasi/registrasi.png">
             </div>*}
             <div class="w-[400px]">
-                <form method="post" action="" id="formRegistrasi" name="formRegistrasi">
-                    <div class="bg-white shadow-md radius-md p-4">
-                        <div class="text-center">
-                            <div class="text-[18pt] font-semibold">Registrasi</div>
-                            <div>Sudah punya akun? <a href="/login" class="text-sky-700 hover:text-amber-500">Masuk</a></div>
-                        </div>
+                <div id='registrasiComplete'>
+                    <form method="post" action="" id="formRegistrasi" name="formRegistrasi">
+                        <div class="bg-white shadow-md radius-md p-4">
+                            <div class="text-center">
+                                <div class="text-[18pt] font-semibold">{$title}</div>
+                                <div>Sudah punya akun? <a href="/login" class="text-sky-700 hover:text-amber-500">Masuk</a></div>
+                            </div>
 
-                        {if $googleAkun == "Tidak Ada"}
+                            {if $googleAkun == "Tidak Ada"}
 
-                        <div class="p-4 text-center">
-                            <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/registrasiByGoogle" type="button" class="w-[100%] px-8 py-2 border radius-lg border-gray-200 font-semibold">
-                                <div class="flex justify-center aligns-center">
-                                <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/logo_google.png" class="w-[25px] h-[25px] mr-[10px]">
-                                    <div>Daftar dengan Google</div>
+                            <div class="p-4 text-center">
+                                <a href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/registrasiByGoogle" type="button" class="w-[100%] px-8 py-2 border radius-lg border-gray-200 font-semibold">
+                                    <div class="flex justify-center aligns-center">
+                                    <img src="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/assets/media/images/logo_google.png" class="w-[25px] h-[25px] mr-[10px]">
+                                        <div>Daftar dengan Google</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-4 flex justify-center aligns-center">
+                                <div class="h-[1px] w-full bg-gray-200">&nbsp;</div>
+                                <div class="mx-4 mt-[-15px]">atau</div>
+                                <div class="h-[1px] w-full bg-gray-200">&nbsp;</div>
+                            </div>
+
+                            {/if}
+
+                            <div class="px-4 {if $googleAkun == 'Ada'}mt-4{/if}">
+                                {$blokemail}
+                                <div class="mb-2">
+                                    <label class="text-[10pt]" for="nama">Nama Lengkap</label>
+                                    <input id="nama" name="nama" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Nama" value="{$nama}">
                                 </div>
-                            </a>
-                        </div>
-                        <div class="p-4 flex justify-center aligns-center">
-                            <div class="h-[1px] w-full bg-gray-200">&nbsp;</div>
-                            <div class="mx-4 mt-[-15px]">atau</div>
-                            <div class="h-[1px] w-full bg-gray-200">&nbsp;</div>
-                        </div>
-
-                        {/if}
-
-                        <div class="px-4">
-                            <div class="mb-2">
-                                <label class="text-[10pt]" for="nama">Nama Lengkap</label>
-                                <input id="nama" name="nama" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Nama" value="{$nama}">
-                            </div>
-                            <div class="mb-2">
-                                <label class="text-[10pt]" for="email">Email</label>
-                                <input id="email" name="email" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Email" value="{$email}">
-                            </div>
-                            <div class="mb-2">
-                                <label class="text-[10pt]" for="password">Password</label>
-                                <input type="password" id="password" name="password" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Password">
-                            </div>
-                            <div class="mb-2">
-                                <label class="text-[10pt]" for="konfirmasipassword">Konfirmasi Password</label>
-                                <input type="password" id="konfirmasipassword" name="konfirmasipassword" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Konfirmasi Password">
-                            </div>
-                            <div class="mb-4">
-                                {\AbieSoft\Utilities\Generate::token()}<input type="hidden" id="__token" name="__token" value="{\AbieSoft\Magic\Reader::token()}">
-                                <button type="submit"  id="btnRegistrasi" name="btnRegistrasi" class="mt-2 radius-lg px-4 py-2 border bg-sky-900 hover:bg-sky-800 text-white font-semibold w-full outline-none">Daftar</button>
-                            </div>
-                            <div class="mb-4 text-[10pt] text-center">
-                                Dengan mendaftar berarti anda menyetujui <a class="text-sky-700 hover:text-amber-500" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/syaratketentuan" target="_blank">Syarat dan Ketentuan</a> toko kami.
+                                <div class="mb-2">
+                                    {if $googleAkun == 'Tidak Ada'}
+                                    <label class="text-[10pt]" for="email">Email</label>
+                                    {/if}
+                                    <input type='{$type}' id="email" name="email" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Email" value="{$email}">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="text-[10pt]" for="password">Password</label>
+                                    <input type="password" id="password" name="password" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Password">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="text-[10pt]" for="konfirmasipassword">Konfirmasi Password</label>
+                                    <input type="password" id="konfirmasipassword" name="konfirmasipassword" class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Konfirmasi Password">
+                                </div>
+                                <div class="mb-4">
+                                    {\AbieSoft\Utilities\Generate::token()}<input type="hidden" id="__token" name="__token" value="{\AbieSoft\Magic\Reader::token()}">
+                                    <button type="submit"  id="btnRegistrasi" name="btnRegistrasi" class="mt-2 radius-lg px-4 py-2 border bg-sky-900 hover:bg-sky-800 text-white font-semibold w-full outline-none">Daftar</button>
+                                </div>
+                                <div class="mb-4 text-[10pt] text-center">
+                                    Dengan mendaftar berarti anda menyetujui <a class="text-sky-700 hover:text-amber-500" href="{\AbieSoft\Utilities\Config::envReader('BASEURL')}/syaratketentuan" target="_blank">Syarat dan Ketentuan</a> toko kami.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

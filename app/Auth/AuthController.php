@@ -399,25 +399,36 @@ class AuthController extends Controller
 
         if (Cookies::ada('ABIESOFT-REGISTRASI')) {
             $googleAkun = "Ada";
+            $jwt = Cookies::lihat('ABIESOFT-REGISTRASI');
+            $nama = JWT::decode($jwt, new Key(Config::envReader('WEB_TOKEN'), 'HS256'))->nama;
+            $email = JWT::decode($jwt, new Key(Config::envReader('WEB_TOKEN'), 'HS256'))->email;
+            $type = "hidden";
+            $title = "Registrasi Dengan Google";
+            $blokemail = Html::el('div')->addHtml('
+                <div class="mb-2">
+                    <label class="text-[10pt]" for="nama">Email</label>
+                    <input class="focus:border-sky-600 radius-lg px-4 py-2 border border-gray-200 w-full outline-none" placeholder="Nama" value="' . $email . '" disabled>
+                </div>
+            ');
         } else {
             $googleAkun = "Tidak Ada";
+            $nama = "";
+            $email = "";
+            $type = "text";
+            $blokemail = "";
+            $title = "Registrasi";
         }
         Cookies::hapus('ABIESOFT-REGISTRASI');
         if (\AbieSoft\Utilities\Define::$showoffRegistrasi) {
-            if (Input::get('nama') && Input::get('email')) {
-                $nama = Input::get('nama');
-                $email = Input::get('email');
-            } else {
-                $nama = "";
-                $email = "";
-            }
             return $this->view(
                 page: '../theme/auth/registrasi',
                 data: [
-                    'title' => 'Registrasi',
+                    'title' => $title,
                     'nama' => $nama,
                     'email' => $email,
-                    'googleAkun' => $googleAkun
+                    'googleAkun' => $googleAkun,
+                    'type' => $type,
+                    'blokemail' => $blokemail
                 ]
             );
         } else {
