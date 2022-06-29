@@ -12,7 +12,7 @@ class migrasi
 
         $sql = 'CREATE TABLE migrasi ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            tabel VARCHAR(20) NOT NULL,
+            tabel VARCHAR(255) NOT NULL,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 
         )';

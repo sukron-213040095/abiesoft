@@ -11,8 +11,8 @@ class kategori
     {
         $sql = 'CREATE TABLE kategori ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            nama VARCHAR(30) NOT NULL,
-            slug VARCHAR(50) NOT NULL UNIQUE,
+            nama VARCHAR(255) NOT NULL,
+            slug VARCHAR(255) NOT NULL UNIQUE,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 
         )';

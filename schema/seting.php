@@ -13,7 +13,7 @@ class seting
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
             nama VARCHAR(255) NOT NULL,
             keterangan TEXT NULL,
-            opsi VARCHAR(10) NULL,
+            opsi VARCHAR(255) NULL,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 
         )';

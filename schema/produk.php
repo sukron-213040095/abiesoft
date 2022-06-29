@@ -18,7 +18,7 @@ class produk
             stok INT(6) DEFAULT 0,
             laku INT(6) DEFAULT 0,
             diskon INT(6) DEFAULT 0,
-            publik VARCHAR(30) DEFAULT "draf",
+            publik VARCHAR(255) DEFAULT "draf",
             dilihat INT(6) DEFAULT 0,
             disukai INT(6) DEFAULT 0,
             kategori_id INT(6) NOT NULL,

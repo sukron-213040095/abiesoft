@@ -11,8 +11,8 @@ class pengiriman
     {
         $sql = 'CREATE TABLE pengiriman ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            no_resi VARCHAR(13) NOT NULL UNIQUE,
-            invoice_id VARCHAR(10) NOT NULL,
+            no_resi VARCHAR(255) NOT NULL UNIQUE,
+            invoice_id VARCHAR(255) NOT NULL,
             alamat_id INT(6) NOT NULL,
             kurir_id INT(6) NOT NULL,
             status_pengiriman INT(6) NOT NULL,

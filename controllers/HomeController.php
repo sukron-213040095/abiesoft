@@ -24,7 +24,7 @@ class HomeController extends Controller
         return $this->view(
             page: "home/index",
             data: [
-                'title' => 'AbieSoft',
+                'title' => \AbieSoft\Utilities\Config::envReader('APP_TITLE'),
                 'authButton' => \App\Controllers\TemplateController::authButton(),
                 'nama' => $nama,
                 'email' => $email,

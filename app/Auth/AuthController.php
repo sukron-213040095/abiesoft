@@ -72,7 +72,7 @@ class AuthController extends Controller
 
     public function login()
     {
-
+        \AbieSoft\Utilities\Generate::token();
         $client = new Google_Client();
         $client->setClientId(\AbieSoft\Utilities\Config::envReader('GOOGLE_CLIENT_ID'));
         $client->setClientSecret(\AbieSoft\Utilities\Config::envReader('GOOGLE_CLIENT_SECRET'));
@@ -108,7 +108,8 @@ class AuthController extends Controller
                                     'title' => 'Lockscreen',
                                     'nama' => $user->nama,
                                     'email' => $user->email,
-                                    'photo' => $pp
+                                    'photo' => $pp,
+                                    'token' => \AbieSoft\Magic\Reader::token()
                                 ]
                             );
                         }
@@ -119,7 +120,8 @@ class AuthController extends Controller
                             data: [
                                 'title' => 'Login',
                                 'reset' => $message,
-                                'googleLogin' => $googleLogin
+                                'googleLogin' => $googleLogin,
+                                'token' => \AbieSoft\Magic\Reader::token()
                             ]
                         );
                     } else {
@@ -130,7 +132,8 @@ class AuthController extends Controller
                             data: [
                                 'title' => 'Login',
                                 'reset' => $message,
-                                'googleLogin' => $googleLogin
+                                'googleLogin' => $googleLogin,
+                                'token' => \AbieSoft\Magic\Reader::token()
                             ]
                         );
                     }
@@ -142,7 +145,8 @@ class AuthController extends Controller
                         data: [
                             'title' => 'Login',
                             'reset' => $message,
-                            'googleLogin' => $googleLogin
+                            'googleLogin' => $googleLogin,
+                            'token' => \AbieSoft\Magic\Reader::token()
                         ]
                     );
                 }
@@ -163,7 +167,8 @@ class AuthController extends Controller
                     data: [
                         'title' => 'Login',
                         'reset' => $message,
-                        'googleLogin' => $googleLogin
+                        'googleLogin' => $googleLogin,
+                        'token' => \AbieSoft\Magic\Reader::token()
                     ]
                 );
             }
@@ -396,7 +401,7 @@ class AuthController extends Controller
 
     public function registrasi()
     {
-
+        \AbieSoft\Utilities\Generate::token();
         if (Cookies::ada('ABIESOFT-REGISTRASI')) {
             $googleAkun = "Ada";
             $jwt = Cookies::lihat('ABIESOFT-REGISTRASI');
@@ -428,7 +433,8 @@ class AuthController extends Controller
                     'email' => $email,
                     'googleAkun' => $googleAkun,
                     'type' => $type,
-                    'blokemail' => $blokemail
+                    'blokemail' => $blokemail,
+                    'token' => \AbieSoft\Magic\Reader::token()
                 ]
             );
         } else {

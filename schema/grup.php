@@ -12,7 +12,7 @@ class grup
 
         $sql = 'CREATE TABLE grup ( 
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            nama VARCHAR(33) NOT NULL,
+            nama VARCHAR(255) NOT NULL,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 
         )';

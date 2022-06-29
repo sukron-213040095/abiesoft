@@ -135,10 +135,8 @@ final class Templatee63cd89a4f extends Latte\Runtime\Template
                                 <input type=\'hidden\' id=\'next\' name=\'next\' value=\'';
 		echo LR\Filters::escapeHtmlAttr(\AbieSoft\Utilities\Input::get('next')) /* line 50 */;
 		echo '\'>
-                                ';
-		echo LR\Filters::escapeHtmlText(\AbieSoft\Utilities\Generate::token()) /* line 51 */;
-		echo '<input type="hidden" id="__token" name="__token" value="';
-		echo LR\Filters::escapeHtmlAttr(\AbieSoft\Magic\Reader::token()) /* line 51 */;
+                                <input type="hidden" id="__token" name="__token" value="';
+		echo LR\Filters::escapeHtmlAttr($token) /* line 51 */;
 		echo '">
                                 <button type="submit"  id="btnLogin" name="btnLogin" class="mt-2 radius-lg px-4 py-2 border bg-sky-900 hover:bg-sky-800 text-white font-semibold w-full outline-none">Login</button>
                             </div>

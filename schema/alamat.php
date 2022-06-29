@@ -13,7 +13,7 @@ class alamat
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
             nama VARCHAR(255) NOT NULL,
             alamat TEXT NOT NULL,
-            nohp VARCHAR(13) NOT NULL,
+            nohp VARCHAR(255) NOT NULL,
             users_id INT(6) NOT NULL,
             dibuat DATETIME DEFAULT CURRENT_TIMESTAMP, 
             diupdate DATETIME NULL 
