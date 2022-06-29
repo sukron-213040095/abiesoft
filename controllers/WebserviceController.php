@@ -173,7 +173,7 @@ class WebserviceController extends Controller
     {
 
         $uid = AuthController::getID();
-        $folder = __DIR__ . "/../public/assets/storage/photo/" . $uid . "/";
+        $folder = __DIR__ . "/../" . \AbieSoft\Utilities\Config::envReader('PUBLIC_FOLDER') . "/assets/storage/photo/" . $uid . "/";
         if (!is_dir($folder)) {
             mkdir($folder, 0777);
         }

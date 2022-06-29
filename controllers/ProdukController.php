@@ -38,7 +38,7 @@ class ProdukController extends Controller
     public static function new()
     {
         $uid = AuthController::getID();
-        $folder = __DIR__ . "/../public/assets/storage/images/" . $uid . "/";
+        $folder = __DIR__ . "/../" . \AbieSoft\Utilities\Config::envReader('PUBLIC_FOLDER') . "/assets/storage/images/" . $uid . "/";
         if (!is_dir($folder)) {
             mkdir($folder, 0777);
         }
@@ -296,7 +296,7 @@ class ProdukController extends Controller
             if (Input::file('gambar', 'tmp_name')) {
 
                 $uid = AuthController::getID();
-                $folder = __DIR__ . "/../public/assets/storage/images/" . $uid . "/";
+                $folder = __DIR__ . "/../" . \AbieSoft\Utilities\Config::envReader('PUBLIC_FOLDER') . "/assets/storage/images/" . $uid . "/";
                 if (!is_dir($folder)) {
                     mkdir($folder, 0777);
                 }

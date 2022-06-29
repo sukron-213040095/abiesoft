@@ -53,7 +53,7 @@ class Command
 
     protected function start()
     {
-        chdir('public');
+        chdir(\AbieSoft\Utilities\Config::envReader('PUBLIC_FOLDER'));
         if (Config::envReader('WEB_SSL') == true) {
             $ssl = "https://";
         } else {
